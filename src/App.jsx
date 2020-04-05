@@ -10,6 +10,7 @@ import Navbar from "./Components/CustomNavBar";
 import AdminLogin from "./Components/AdminLogin";
 import StudentLogin from "./Components/StudentLogin";
 import TutorLogin from "./Components/TutorLogin";
+import TutorSignUp from "./Components/TutorSignUp";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/adminlogin" component={AdminLogin} />
         <Route path="/studentlogin" component={StudentLogin} />
         <Route path="/tutorlogin" component={TutorLogin} />
+        <Route path="/signup" component={TutorSignUp} />
       </div>
     </Router>
   );

@@ -32,7 +32,9 @@ export default class CustomNavBar extends Component {
           </Nav>
           <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="primary">Search</Button>
+            <Button className="buttonSearch" variant="primary">
+              Search
+            </Button>
           </Form>
         </Navbar.Collapse>
       </Navbar>

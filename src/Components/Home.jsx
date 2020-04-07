@@ -17,9 +17,6 @@ export default class Home extends Component {
       <div style={{ width: "100%" }}>
         {/* <Container> */}
         {/* <Jumbotron> */}
-        {/* <h1>Welcome to Online Private Tutors Finder</h1>
-          <p>This is just for testing the UI</p> */}
-
         <Carousel>
           <Carousel.Item>
             <img
@@ -67,36 +64,51 @@ export default class Home extends Component {
 
         <Container>
           <Row className="show-grid text-center">
-            <Col>
+            <Col xs={12} sm={4} className="person-wrapper">
               <Image
                 src="./assets/avatar-pic-circle-png-5.png"
                 circle
                 className="profile-pic"
               />
-              {/* <h3>Frank</h3>
-              <p>bjsbhgvag gvdhayg ghvsdhgdxcvygv </p> */}
+            </Col>
+            <Col xs={12} sm={4} className="person-wrapper">
+              <Image
+                src="./assets/avatar-pic-circle-png-5.png"
+                circle
+                className="profile-pic"
+              />
+            </Col>
+            <Col xs={12} sm={4} className="person-wrapper">
+              <Image
+                src="./assets/avatar-pic-circle-png-5.png"
+                circle
+                className="profile-pic"
+              />
+            </Col>
+          </Row>
+        </Container>
+
+        <Container>
+          <Row className="show-grid text-center">
+            <Col xs={12} sm={4}>
               <Link to="/adminlogin">
-                <Button bsStyle="primary">Start as Admin </Button>
+                <Button className="button" bsStyle="primary">
+                  Start as Admin{" "}
+                </Button>
               </Link>
             </Col>
-            <Col>
-              <Image
-                src="./assets/avatar-pic-circle-png-5.png"
-                circle
-                className="profile-pic"
-              />
+            <Col xs={12} sm={4}>
               <Link to="/studentlogin">
-                <Button bsStyle="primary">Start as Student </Button>
+                <Button className="button" bsStyle="primary">
+                  Start as Student{" "}
+                </Button>
               </Link>
             </Col>
-            <Col>
-              <Image
-                src="./assets/avatar-pic-circle-png-5.png"
-                circle
-                className="profile-pic"
-              />
+            <Col xs={12} sm={4}>
               <Link to="/tutorlogin">
-                <Button bsStyle="primary">Start as Tutor </Button>
+                <Button className="button" bsStyle="primary">
+                  Start as Tutor{" "}
+                </Button>
               </Link>
             </Col>
           </Row>

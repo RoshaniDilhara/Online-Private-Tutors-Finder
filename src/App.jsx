@@ -8,6 +8,7 @@ import About from "./Components/About";
 import News from "./Components/News";
 import Navbar from "./Components/CustomNavBar";
 import AdminLogin from "./Components/AdminLogin";
+import AdminHome from "./Components/AdminHome";
 import StudentLogin from "./Components/StudentLogin";
 import TutorLogin from "./Components/TutorLogin";
 import TutorSignUp from "./Components/TutorSignUp";
@@ -21,6 +22,7 @@ function App() {
         <Route path="/about" component={About} />
         <Route path="/news" component={News} />
         <Route path="/adminlogin" component={AdminLogin} />
+        <Route path="/adminhome" component={AdminHome} />
         <Route path="/studentlogin" component={StudentLogin} />
         <Route path="/tutorlogin" component={TutorLogin} />
         <Route path="/signup" component={TutorSignUp} />

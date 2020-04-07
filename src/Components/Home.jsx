@@ -7,7 +7,7 @@ import {
   Row,
   Col,
   Image,
-  Button
+  Button,
 } from "react-bootstrap";
 import "./Home.css";
 

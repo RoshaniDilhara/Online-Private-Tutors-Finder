@@ -1,7 +1,12 @@
 import React, { Component } from "react";
+import TutorSignIn from "./TutorSignIn";
 
 export default class TutorLogin extends Component {
   render() {
-    return <div>TUTOR LOGIN PAGE</div>;
+    return (
+      <div>
+        <TutorSignIn />
+      </div>
+    );
   }
 }

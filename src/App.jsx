@@ -8,9 +8,11 @@ import About from "./Components/About";
 import News from "./Components/News";
 import Navbar from "./Components/CustomNavBar";
 import AdminLogin from "./Components/AdminLogin";
-import StudentLogin from "./Components/StudentLogin";
 import TutorLogin from "./Components/TutorLogin";
 import TutorSignUp from "./Components/TutorSignUp";
+import StudentLogin from "./Components/Student/StudentLogin";
+import StudentSection from "./Components/Student/StudentSection";
+import StudentSignUp from "./Components/Student/StudentSignUp";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
         <Route path="/studentlogin" component={StudentLogin} />
         <Route path="/tutorlogin" component={TutorLogin} />
         <Route path="/signup" component={TutorSignUp} />
+        <Route path="/studentsection" component={StudentSection} />
+        <Route path="/student-signup" component={StudentSignUp} />
       </div>
     </Router>
   );

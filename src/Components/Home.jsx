@@ -21,40 +21,41 @@ export default class Home extends Component {
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="./assets/studentcopy.jpg"
+              src="./assets/book1.jpg"
               alt="First slide"
               style={{ width: "100%" }}
             />
             <Carousel.Caption>
               <h3>Welcome to Online Private Tutors Finder</h3>
-              <p>This is the home page</p>
+              <p>The best online Tutoring platform !</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="./assets/bookcopy.jpg"
+              src="./assets/teach.jpg"
               alt="Second slide"
               style={{ width: "100%" }}
             />
 
             <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h3>jfvbsh</h3>
+              <p>hsbdvhabuhb</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
             <img
               className="w-100"
-              src="./assets/learncopy2.jpg"
+              src="./assets/learn.jpg"
               alt="Third slide"
               style={{ width: "100%" }}
             />
 
             <Carousel.Caption>
-              <h3>Third slide label</h3>
+              <h3>Find a Tutor Online Today !</h3>
               <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                Our interactive online tuition keeps your child's studies on
+                track and to support learning
               </p>
             </Carousel.Caption>
           </Carousel.Item>
@@ -66,21 +67,21 @@ export default class Home extends Component {
           <Row className="show-grid text-center">
             <Col xs={12} sm={4} className="person-wrapper">
               <Image
-                src="./assets/avatar-pic-circle-png-5.png"
+                src="./assets/admin-512.png"
                 circle
                 className="profile-pic"
               />
             </Col>
             <Col xs={12} sm={4} className="person-wrapper">
               <Image
-                src="./assets/avatar-pic-circle-png-5.png"
+                src="./assets/Student-3-512.png"
                 circle
                 className="profile-pic"
               />
             </Col>
             <Col xs={12} sm={4} className="person-wrapper">
               <Image
-                src="./assets/avatar-pic-circle-png-5.png"
+                src="./assets/tutor-512.png"
                 circle
                 className="profile-pic"
               />

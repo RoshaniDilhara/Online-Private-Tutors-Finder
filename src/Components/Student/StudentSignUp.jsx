@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../TutorSignUp.css";
+import "../Tutor/TutorSignUp.css";
 
 class StudentSignUp extends Component {
   state = {};

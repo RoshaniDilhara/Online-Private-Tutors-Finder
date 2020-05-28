@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./Tutor/TutorSignIn.css";
+import "./TutorSignIn.css";
 
-class AdminLogin extends Component {
+class TutorSignIn extends Component {
   state = {};
   render() {
     return (
@@ -9,7 +9,11 @@ class AdminLogin extends Component {
         <div class="login-html">
           <input id="tab-1" type="radio" name="tab" class="sign-in" checked />
           <label for="tab-1" class="tab">
-            Sign In
+            <a href="/tutorlogin">Sign In</a>
+          </label>
+          <input id="tab-2" type="radio" name="tab" class="sign-up" />
+          <label for="tab-2" class="tab">
+            <a href="/tutorsignup">Sign Up</a>
           </label>
           <div class="login-form">
             <div class="sign-in-htm">
@@ -51,4 +55,4 @@ class AdminLogin extends Component {
   }
 }
 
-export default AdminLogin;
+export default TutorSignIn;

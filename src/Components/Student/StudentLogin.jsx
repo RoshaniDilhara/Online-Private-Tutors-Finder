@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, HashRouter as Router } from "react-router-dom";
 import { Nav } from "react-bootstrap";
-import "../TutorSignIn.css";
+import "../Tutor/TutorSignIn.css";
 
 export default class StudentLogin extends Component {
   render() {

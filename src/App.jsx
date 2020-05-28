@@ -9,8 +9,8 @@ import News from "./Components/News";
 import Navbar from "./Components/CustomNavBar";
 import AdminLogin from "./Components/AdminLogin";
 import AdminHome from "./Components/AdminHome";
-import TutorLogin from "./Components/TutorLogin";
-import TutorSignUp from "./Components/TutorSignUp";
+import TutorLogin from "./Components/Tutor/TutorLogin";
+import TutorSignUp from "./Components/Tutor/TutorSignUp";
 import StudentLogin from "./Components/Student/StudentLogin";
 import StudentSection from "./Components/Student/StudentSection";
 import StudentSignUp from "./Components/Student/StudentSignUp";
@@ -27,7 +27,7 @@ function App() {
         <Route path="/adminhome" component={AdminHome} />
         <Route path="/studentlogin" component={StudentLogin} />
         <Route path="/tutorlogin" component={TutorLogin} />
-        <Route path="/signup" component={TutorSignUp} />
+        <Route path="/tutorsignup" component={TutorSignUp} />
         <Route path="/studentsection" component={StudentSection} />
         <Route path="/student-signup" component={StudentSignUp} />
       </div>

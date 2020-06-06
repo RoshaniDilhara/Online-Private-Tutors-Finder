@@ -1,26 +1,51 @@
 import React, { Component } from "react";
-import "./Tutor/TutorSignIn.css";
+import "../Tutor/TutorSignIn.css";
 
 class AdminLogin extends Component {
-  state = {};
+//   constructor() {
+//     super();
+//     this.state = {
+//       email: "",
+//       password: "",
+//       errors: {}
+//     };
+//   }
+
+// onChange = e => {
+//     this.setState({ [e.target.id]: e.target.value });
+//  };
+
+// onSubmit = e => {
+//     e.preventDefault();
+
+//     const userData = {
+//       email: this.state.email,
+//       password: this.state.password
+//     };
+
+//     console.log(userData);
+// };
+
   render() {
+    // const { errors } = this.state;
+
     return (
       <div class="login-wrap">
         <div class="login-html">
           <input id="tab-1" type="radio" name="tab" class="sign-in" checked />
-          <label for="tab-1" class="tab">
+          <label htmlFor="tab-1" class="tab">
             Sign In
           </label>
           <div class="login-form">
             <div class="sign-in-htm">
               <div class="group">
-                <label for="user" class="label">
-                  Username
+                <label htmlFor="user" class="label">
+                  Email
                 </label>
                 <input id="user" type="text" class="input" />
               </div>
               <div class="group">
-                <label for="pass" class="label">
+                <label htmlFor="pass" class="label">
                   Password
                 </label>
                 <input
@@ -32,7 +57,7 @@ class AdminLogin extends Component {
               </div>
               <div class="group">
                 <input id="check" type="checkbox" class="check" checked />
-                <label for="check">
+                <label htmlFor="check">
                   <span class="icon"></span> Keep me Signed in
                 </label>
               </div>

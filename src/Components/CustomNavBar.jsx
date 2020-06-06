@@ -2,11 +2,9 @@ import React, { Component } from "react";
 import {
   Navbar,
   Nav,
-  NavDropdown,
   Form,
   FormControl,
   Button,
-  NavItem
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 

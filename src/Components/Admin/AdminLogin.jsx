@@ -29,6 +29,10 @@ class AdminLogin extends Component {
   render() {
     // const { errors } = this.state;
 
+    function my_button_click_handler(){
+    alert('Button Clcked');
+    }
+
     return (
       <div class="login-wrap">
         <div class="login-html">
@@ -62,7 +66,7 @@ class AdminLogin extends Component {
                 </label>
               </div>
               <div class="group">
-                <input type="submit" class="button" value="Sign In" />
+                <button type="submit" onClick="my_button_click_handler" class="button"  >Sign In</button>
               </div>
               <div class="hr"></div>
               <div class="foot-lnk">

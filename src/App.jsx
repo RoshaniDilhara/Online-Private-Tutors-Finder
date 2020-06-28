@@ -1,8 +1,7 @@
 import React from "react";
-// import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./Components/Home";
 import About from "./Components/About";
 import News from "./Components/News";
@@ -15,7 +14,9 @@ import StudentLogin from "./Components/Student/StudentLogin";
 import StudentSection from "./Components/Student/StudentSection";
 import StudentSignUp from "./Components/Student/StudentSignUp";
 
-function App() {
+
+
+function App() {  
   return (
     <Router>
       <div>
@@ -31,7 +32,7 @@ function App() {
         <Route path="/studentsection" component={StudentSection} />
         <Route path="/student-signup" component={StudentSignUp} />
       </div>
-    </Router>
+    </Router>    
   );
 }
 

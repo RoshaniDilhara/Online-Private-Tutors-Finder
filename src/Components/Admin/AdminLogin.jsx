@@ -1,38 +1,57 @@
 import React, { Component } from "react";
 import "../Tutor/TutorSignIn.css";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { loginUser } from "./actions/adminAuthActions";
+import classnames from "classnames";
+import { Link, withRouter } from "react-router-dom";
 
 class AdminLogin extends Component {
-//   constructor() {
-//     super();
-//     this.state = {
-//       email: "",
-//       password: "",
-//       errors: {}
-//     };
-//   }
+  constructor(props) {
+    super(props);
 
-// onChange = e => {
-//     this.setState({ [e.target.id]: e.target.value });
-//  };
+    this.state = {
+      email: "",
+      password: "",
+    };
 
-// onSubmit = e => {
-//     e.preventDefault();
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-//     const userData = {
-//       email: this.state.email,
-//       password: this.state.password
-//     };
-
-//     console.log(userData);
-// };
-
-  render() {
-    // const { errors } = this.state;
-
-    function my_button_click_handler(){
-    alert('Button Clcked');
+  componentDidMount() {
+    // If logged in and user navigates to Login page, should redirect them to dashboard
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/adminhome");
     }
+  }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/adminhome"); // push user to dashboard when they login
+    }
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors,
+      });
+    }
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  handleSubmit(e) {
+    const adminData = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+    console.log(adminData);
+    this.props.loginUser(adminData);
+  }
+  render() {
     return (
       <div class="login-wrap">
         <div class="login-html">
@@ -46,7 +65,14 @@ class AdminLogin extends Component {
                 <label htmlFor="user" class="label">
                   Email
                 </label>
-                <input id="user" type="text" class="input" />
+                <input
+                  id="user"
+                  type="text"
+                  class="input"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
               </div>
               <div class="group">
                 <label htmlFor="pass" class="label">
@@ -57,6 +83,9 @@ class AdminLogin extends Component {
                   type="password"
                   class="input"
                   data-type="password"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
                 />
               </div>
               <div class="group">
@@ -66,7 +95,13 @@ class AdminLogin extends Component {
                 </label>
               </div>
               <div class="group">
-                <button type="submit" onClick="my_button_click_handler" class="button"  >Sign In</button>
+                <button
+                  type="submit"
+                  class="button"
+                  onClick={this.handleSubmit}
+                >
+                  Sign In
+                </button>
               </div>
               <div class="hr"></div>
               <div class="foot-lnk">
@@ -80,4 +115,13 @@ class AdminLogin extends Component {
   }
 }
 
-export default AdminLogin;
+AdminLogin.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+export default connect(mapStateToProps, { loginUser })(withRouter(AdminLogin));

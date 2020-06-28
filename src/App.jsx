@@ -13,26 +13,33 @@ import TutorSignUp from "./Components/Tutor/TutorSignUp";
 import StudentLogin from "./Components/Student/StudentLogin";
 import StudentSection from "./Components/Student/StudentSection";
 import StudentSignUp from "./Components/Student/StudentSignUp";
+import TutorHome from "./Components/Tutor/TutorHome";
+
+import { Provider } from "react-redux";
+import store from "./Components/store";
 
 
 
 function App() {  
   return (
-    <Router>
-      <div>
-        <Navbar />
-        <Route exact path="/" component={Home} />
-        <Route path="/about" component={About} />
-        <Route path="/news" component={News} />
-        <Route path="/adminlogin" component={AdminLogin} />
-        <Route path="/adminhome" component={AdminHome} />
-        <Route path="/studentlogin" component={StudentLogin} />
-        <Route path="/tutorlogin" component={TutorLogin} />
-        <Route path="/tutorsignup" component={TutorSignUp} />
-        <Route path="/studentsection" component={StudentSection} />
-        <Route path="/student-signup" component={StudentSignUp} />
-      </div>
-    </Router>    
+    <Provider store={store}>
+      <Router>
+        <div>
+          <Navbar />
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/news" component={News} />
+          <Route path="/adminlogin" component={AdminLogin} />
+          <Route path="/adminhome" component={AdminHome} />
+          <Route path="/studentlogin" component={StudentLogin} />
+          <Route path="/tutorlogin" component={TutorLogin} />
+          <Route path="/tutorsignup" component={TutorSignUp} />
+          <Route path="/studentsection" component={StudentSection} />
+          <Route path="/student-signup" component={StudentSignUp} />
+          <Route path="/tutorhome" component={TutorHome} />
+        </div>
+      </Router>
+    </Provider>
   );
 }
 

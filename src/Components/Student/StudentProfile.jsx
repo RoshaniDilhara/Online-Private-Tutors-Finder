@@ -11,9 +11,12 @@ class StudentProfile extends Component {
     console.log("User logged out");
   };
   render() {
+    //Take the details of the logged user
+    const { user } = this.props.auth;
+    console.log(user);
     return (
       <div>
-        <h1>Hello</h1>
+        <h1>Hello,{user.username.split(" ")[0]}</h1>
         <button
           style={{
             width: "150px",

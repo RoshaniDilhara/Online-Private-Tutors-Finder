@@ -71,12 +71,12 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 ### `npm install react-time-picker react-date-picker`
 
 ## `Register and Login Changes`
-frontend -> package.jason changed
-backend -> concurrent run added
+frontend -> package.jason changed.
+backend -> concurrent run added.
 Frontend and backend will be run concurrently
 
 ## `Run Concurrently`
-cd in to the backend folder
+cd in to the backend folder and do the changes given in the read me of backend folder.
 Run the command `npm start`
 
 ### `npm i is-empty`

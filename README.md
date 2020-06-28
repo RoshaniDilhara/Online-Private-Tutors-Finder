@@ -70,6 +70,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 ### `npm install axios react-table styled-components`
 ### `npm install react-time-picker react-date-picker`
 ### `npm i is-empty`
+### `npm i axios classnames jwt-decode react-redux react-router-dom redux redux-thunk`
 
 # Extensions to be added to the browser
 ### `React Developer Tools`

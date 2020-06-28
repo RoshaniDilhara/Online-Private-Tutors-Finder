@@ -1,9 +1,57 @@
 import React, { Component } from "react";
-import { Link, HashRouter as Router } from "react-router-dom";
+import { Link, withRouter, HashRouter as Router } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 import "../Tutor/TutorSignIn.css";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { loginUser } from "./actions/studentAuthActions";
+import classnames from "classnames";
 
-export default class StudentLogin extends Component {
+class StudentLogin extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: "",
+      password: "",
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    // If logged in and user navigates to Login page, should redirect them to dashboard
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/studentsection");
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/studentsection"); // push user to dashboard when they login
+    }
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors,
+      });
+    }
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  handleSubmit(e) {
+    const studentData = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+    console.log(studentData);
+    this.props.loginUser(studentData);
+  }
   render() {
     return (
       <div class="login-wrap">
@@ -20,9 +68,16 @@ export default class StudentLogin extends Component {
             <div class="sign-in-htm">
               <div class="group">
                 <label for="user" class="label">
-                  Username
+                  Email
                 </label>
-                <input id="user" type="text" class="input" />
+                <input
+                  id="user"
+                  type="text"
+                  class="input"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
               </div>
               <div class="group">
                 <label for="pass" class="label">
@@ -33,6 +88,9 @@ export default class StudentLogin extends Component {
                   type="password"
                   class="input"
                   data-type="password"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
                 />
               </div>
               <div class="group">
@@ -42,7 +100,13 @@ export default class StudentLogin extends Component {
                 </label>
               </div>
               <div class="group">
-                <input type="submit" class="button" value="Sign In" />
+                <button
+                  type="submit"
+                  class="button"
+                  onClick={this.handleSubmit}
+                >
+                  Sign In
+                </button>
               </div>
               <div class="hr"></div>
               <div class="foot-lnk">
@@ -55,3 +119,16 @@ export default class StudentLogin extends Component {
     );
   }
 }
+
+StudentLogin.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+export default connect(mapStateToProps, { loginUser })(
+  withRouter(StudentLogin)
+);

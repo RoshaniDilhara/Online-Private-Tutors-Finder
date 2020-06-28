@@ -79,3 +79,8 @@ Frontend and backend will be run concurrently
 ## `Run Concurrently`
 cd in to the backend folder and do the changes given in the read me of backend folder.
 Run the command `npm start`
+
+## Refered
+https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669
+https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-2-frontend-6eac4e38ee82
+https://blog.bitsrc.io/build-a-login-auth-app-with-the-mern-stack-part-3-react-components-88190f8db718

@@ -69,6 +69,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 ### `npm install axios react-table styled-components`
 ### `npm install react-time-picker react-date-picker`
+### `npm i is-empty`
 
 ## `Register and Login Changes`
 frontend -> package.jason changed.
@@ -78,5 +79,3 @@ Frontend and backend will be run concurrently
 ## `Run Concurrently`
 cd in to the backend folder and do the changes given in the read me of backend folder.
 Run the command `npm start`
-
-### `npm i is-empty`

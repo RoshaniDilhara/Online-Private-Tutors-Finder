@@ -69,3 +69,12 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 ### `npm install axios react-table styled-components`
 ### `npm install react-time-picker react-date-picker`
+
+## `Register and Login Changes`
+frontend -> package.jason changed
+backend -> concurrent run added
+Frontend and backend will be run concurrently
+
+## `Run Concurrently`
+cd in to the backend folder
+Run the command ## `npm start`

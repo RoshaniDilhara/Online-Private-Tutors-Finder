@@ -77,4 +77,6 @@ Frontend and backend will be run concurrently
 
 ## `Run Concurrently`
 cd in to the backend folder
-Run the command ## `npm start`
+Run the command `npm start`
+
+### `npm i is-empty`

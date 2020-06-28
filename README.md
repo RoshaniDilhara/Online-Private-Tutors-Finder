@@ -71,6 +71,10 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 ### `npm install react-time-picker react-date-picker`
 ### `npm i is-empty`
 
+### `Extensions to be added to the browser`
+# React Developer Tools to your browser
+# Add Redux DevTools to your browser
+
 ## `Register and Login Changes`
 frontend -> package.jason changed.
 backend -> concurrent run added.

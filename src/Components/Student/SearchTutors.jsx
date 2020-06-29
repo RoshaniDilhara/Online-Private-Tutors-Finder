@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import api from "../api/tutorapi";
 import styled from "styled-components";
 import apirequest from "../api/requestsapi";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 const Wrapper = styled.div`
   padding: 0 40px 40px 40px;
@@ -14,7 +16,7 @@ class SearchTutors extends Component {
     this.state = {
       tutors: [],
       isLoading: false,
-      studentID: "abc1234",
+      studentID: this.props.match.params.value,
       accept: false,
       mytutors: [],
       requests: [],
@@ -45,6 +47,7 @@ class SearchTutors extends Component {
 
   render() {
     const { tutors, isLoading, requests, mytutors } = this.state;
+    console.log(this.state.studentID);
     this.state.requests.map((req) => {
       if (req.studentID == this.state.studentID) {
         this.state.tutors.map((tut) => {

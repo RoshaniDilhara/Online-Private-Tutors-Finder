@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, HashRouter, Route } from "react-router-dom";
+import { Link, HashRouter, Route, withRouter } from "react-router-dom";
 import apiappoinment from "../api/appoinmentapi";
 import api from "../api/tutorapi";
 
@@ -7,7 +7,7 @@ class SentAppoinments extends Component {
   state = {
     tutors: [],
     appoinments: [],
-    studentID: "abc1234",
+    studentID: this.props.match.params.value,
     myappoinments: [],
   };
   deleteAppoinment(newappoinment) {
@@ -17,8 +17,6 @@ class SentAppoinments extends Component {
     }
   }
   componentDidMount = async () => {
-    // window.location.reload();
-
     await api.getAllTutor().then((tutors) => {
       this.setState({
         tutors: tutors.data.data,
@@ -54,14 +52,13 @@ class SentAppoinments extends Component {
         <div>
           <h5>
             <strong>
-              <Link to="/fixed-appoinments">
+              <Link to={`/fixed-appoinments/${this.state.studentID}`}>
                 <font color="purple">
                   &nbsp;&nbsp;&nbsp;Fixed Appoinments{"     "}
                 </font>
               </Link>
-              <Link to="/sentappoinments">
-                <font color="red">&nbsp;&nbsp;&nbsp;Pending Appoinments</font>
-              </Link>
+
+              <font color="red">&nbsp;&nbsp;&nbsp;Pending Appoinments</font>
             </strong>
           </h5>
           <hr color="blue" />

@@ -8,7 +8,7 @@ class AppoinmentForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      studentID: "abc1234",
+      studentID: this.props.match.params.studentID,
       date: new Date(),
       startTime: "10:00",
       endTime: "10:00",

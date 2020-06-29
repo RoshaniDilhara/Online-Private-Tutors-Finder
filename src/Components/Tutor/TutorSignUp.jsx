@@ -21,6 +21,7 @@ class TutorSignUp extends Component {
       gender: "",
       subjects: "",
       description: "",
+      errors: {},
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -59,6 +60,8 @@ class TutorSignUp extends Component {
   }
 
   render() {
+    const { errors } = this.state;
+    //console.log(errors);
     return (
       <div class="signup-wrap">
         <div class="login-html">
@@ -83,8 +86,10 @@ class TutorSignUp extends Component {
                   class="input"
                   name="fullname"
                   value={this.state.fullname}
+                  error={errors.fullname}
                   onChange={this.handleChange}
                 />
+                <span class="error-display">{errors.fullname}</span>
               </div>
               <div class="group">
                 <label for="pass" class="label">
@@ -95,9 +100,11 @@ class TutorSignUp extends Component {
                   type="text"
                   class="input"
                   value={this.state.email}
+                  error={errors.email}
                   name="email"
                   onChange={this.handleChange}
                 />
+                <span class="error-display">{errors.email}</span>
               </div>
 
               <div class="group">
@@ -109,9 +116,11 @@ class TutorSignUp extends Component {
                   type="text"
                   class="input"
                   value={this.state.address}
+                  error={errors.email}
                   name="address"
                   onChange={this.handleChange}
                 />
+                <span class="error-display">{errors.email}</span>
               </div>
 
               <div class="group">
@@ -123,9 +132,11 @@ class TutorSignUp extends Component {
                   type="text"
                   class="input"
                   value={this.state.nic}
+                  error={errors.nic}
                   name="nic"
                   onChange={this.handleChange}
                 />
+                <span class="error-display">{errors.nic}</span>
               </div>
 
               <div class="group">
@@ -137,9 +148,11 @@ class TutorSignUp extends Component {
                   type="text"
                   class="input"
                   value={this.state.dob}
+                  error={errors.dob}
                   name="dob"
                   onChange={this.handleChange}
                 />
+                <span class="error-display">{errors.dob}</span>
               </div>
 
               <div class="group">
@@ -151,9 +164,11 @@ class TutorSignUp extends Component {
                   type="text"
                   class="input"
                   value={this.state.contact_number}
+                  error={errors.contact_number}
                   name="contact_number"
                   onChange={this.handleChange}
                 />
+                <span class="error-display">{errors.contact_number}</span>
               </div>
 
               <div class="group">
@@ -165,9 +180,11 @@ class TutorSignUp extends Component {
                   type="text"
                   class="input"
                   value={this.state.gender}
+                  error={errors.gender}
                   name="gender"
                   onChange={this.handleChange}
                 />
+                <span class="error-display">{errors.gender}</span>
               </div>
 
               <div class="group">
@@ -179,9 +196,11 @@ class TutorSignUp extends Component {
                   type="text"
                   class="input"
                   value={this.state.subjects}
+                  error={errors.subjects}
                   name="subjects"
                   onChange={this.handleChange}
                 />
+                <span class="error-display">{errors.subjects}</span>
               </div>
 
               <div class="group">
@@ -193,9 +212,11 @@ class TutorSignUp extends Component {
                   type="text"
                   class="input"
                   value={this.state.description}
+                  error={errors.description}
                   name="description"
                   onChange={this.handleChange}
                 />
+                <span class="error-display">{errors.description}</span>
               </div>
 
               <div class="group">
@@ -208,9 +229,11 @@ class TutorSignUp extends Component {
                   class="input"
                   data-type="password"
                   value={this.state.password}
+                  error={errors.password}
                   name="password"
                   onChange={this.handleChange}
                 />
+                <span class="error-display">{errors.password}</span>
               </div>
 
               <div class="group">

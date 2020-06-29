@@ -13,6 +13,7 @@ class AdminLogin extends Component {
     this.state = {
       email: "",
       password: "",
+      errors: {},
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -52,6 +53,8 @@ class AdminLogin extends Component {
     this.props.loginUser(adminData);
   }
   render() {
+    const { errors } = this.state;
+    //console.log(errors);
     return (
       <div class="login-wrap">
         <div class="login-html">
@@ -71,8 +74,13 @@ class AdminLogin extends Component {
                   class="input"
                   name="email"
                   value={this.state.email}
+                  error={errors.email}
                   onChange={this.handleChange}
                 />
+                <span class="error-display">
+                  {errors.email}
+                  {errors.emailnotfound}
+                </span>
               </div>
               <div class="group">
                 <label htmlFor="pass" class="label">
@@ -85,8 +93,13 @@ class AdminLogin extends Component {
                   data-type="password"
                   name="password"
                   value={this.state.password}
+                  error={errors.password}
                   onChange={this.handleChange}
                 />
+                <span class="error-display">
+                  {errors.password}
+                  {errors.passwordincorrect}
+                </span>
               </div>
               <div class="group">
                 <input id="check" type="checkbox" class="check" checked />

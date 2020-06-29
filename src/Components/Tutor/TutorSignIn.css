@@ -166,3 +166,7 @@ a {
 .foot-lnk {
   text-align: center;
 }
+
+.error-display {
+  color: red;
+}

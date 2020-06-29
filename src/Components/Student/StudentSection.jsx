@@ -8,9 +8,23 @@ import StudentProfile from "./StudentProfile";
 import SentAppoinments from "./SentAppoinments";
 import AppoinmentForm from "./AppoinmentForm";
 import FixedAppoinments from "./FixedAppoinments";
+import apistudent from "../api/studentapi";
 
 class StudentSection extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      studentID: this.props.match.params.value,
+      student: {},
+    };
+  }
+  componentDidMount = async () => {
+    await apistudent.getStudentById(this.state.studentID).then((stu) => {
+      this.setState({
+        student: stu.data.data,
+      });
+    });
+  };
   render() {
     return (
       <div>
@@ -19,7 +33,18 @@ class StudentSection extends Component {
             <div className="linkside">
               <div className="gap">
                 <Link
-                  to="/mytutors"
+                  to={`/myprofile/${this.state.studentID}`}
+                  className="waves-effect waves-light btn-small"
+                >
+                  {" "}
+                  <font color="blue">
+                    {this.state.student.username}'S PROFILE
+                  </font>
+                </Link>
+              </div>
+              <div className="gap">
+                <Link
+                  to={`/mytutors/${this.state.studentID}`}
                   className="waves-effect waves-light btn-small"
                 >
                   <font color="blue"> MY TUTORS</font>
@@ -27,7 +52,7 @@ class StudentSection extends Component {
               </div>
               <div className="gap">
                 <Link
-                  to="/searchtutor"
+                  to={`/searchtutor/${this.state.studentID}`}
                   className="waves-effect waves-light btn-small"
                 >
                   <font color="blue">SEARCH TUTORS</font>
@@ -35,7 +60,7 @@ class StudentSection extends Component {
               </div>
               <div className="gap">
                 <Link
-                  to="/sentrequests"
+                  to={`/sentrequests/${this.state.studentID}`}
                   className="waves-effect waves-light btn-small"
                 >
                   <font color="blue"> SENT REQUESTS</font>
@@ -43,39 +68,43 @@ class StudentSection extends Component {
               </div>
               <div className="gap">
                 <Link
-                  to="/sentappoinments"
+                  to={`/sentappoinments/${this.state.studentID}`}
                   className="waves-effect waves-light btn-small"
                 >
                   <font color="blue"> SENT APPOINMENTS </font>
-                </Link>
-              </div>
-              <div className="gap">
-                <Link
-                  to="/myprofile"
-                  className="waves-effect waves-light btn-small"
-                >
-                  <font color="blue">PROFILE</font>
                 </Link>
               </div>
             </div>
             <div className="barside">
               <Route
                 exact
-                path="/fixed-appoinments"
+                path="/fixed-appoinments/:value"
                 component={FixedAppoinments}
               />
-              <Route exact path="/mytutors" component={MyTutors} />
-              <Route exact path="/searchtutor" component={SearchTutors} />
-              <Route exact path="/sentrequests" component={SentRequests} />
-              <Route exact path="/myprofile" component={StudentProfile} />
+              <Route exact path="/mytutors/:value" component={MyTutors} />
               <Route
                 exact
-                path="/appoinments/:value"
+                path="/searchtutor/:value"
+                component={SearchTutors}
+              />
+              <Route
+                exact
+                path="/sentrequests/:value"
+                component={SentRequests}
+              />
+              <Route
+                exact
+                path="/myprofile/:value"
+                component={StudentProfile}
+              />
+              <Route
+                exact
+                path="/appoinments/:value/:studentID"
                 component={AppoinmentForm}
               />
               <Route
                 exact
-                path="/sentappoinments"
+                path="/sentappoinments/:value"
                 component={SentAppoinments}
               />
             </div>

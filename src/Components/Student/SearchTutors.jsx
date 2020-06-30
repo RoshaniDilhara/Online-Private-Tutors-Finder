@@ -53,7 +53,6 @@ class SearchTutors extends Component {
         this.state.tutors.map((tut) => {
           if (tut._id == req.tutorID) {
             const index = tutors.indexOf(tut);
-            this.setState({ isLoading: true });
             if (index > -1) {
               tutors.splice(index, 1);
             }
@@ -90,7 +89,7 @@ class SearchTutors extends Component {
 
             <tbody>
               {this.state.tutors.map((newtutor) => {
-                if (newtutor._id != "" && this.state.isLoading) {
+                if (newtutor._id != "") {
                   return (
                     <tr>
                       <td>{newtutor.fullname}</td>

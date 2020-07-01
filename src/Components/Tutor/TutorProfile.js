@@ -3,51 +3,51 @@ import { logoutUser } from "./actions/tutorAuthActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
+import api from "../api/tutorapi";
 
 class TutorProfile extends Component {
-  onLogoutClick = (e) => {
-    e.preventDefault();
-    this.props.logoutUser();
-    console.log("User logged out");
+  constructor(props) {
+    super(props);
+    //const { user } = this.props.auth;
+    this.state = {
+      tutorID: this.props.match.params.value,
+      tutor: {},
+    };
+    //console.log(this.state.tutorID);
+  }
+  componentDidMount = async () => {
+    await api.getTutorById(this.state.tutorID).then((tut) => {
+      this.setState({
+        tutor: tut.data.data,
+      });
+    });
   };
   render() {
     //Take the details of the logged user
-    const { user } = this.props.auth;
+    //const { user } = this.props.auth;
     return (
       <div>
-        <h5>{user.fullname}</h5>
-        <h5>{user.email}</h5>
-        <h5>{user.address}</h5>
-        <h5>{user.nic}</h5>
-        <h5>{user.dob}</h5>
-        <h5>{user.contact_number}</h5>
-        <h5>{user.gender}</h5>
-        <h5>{user.subjects}</h5>
-        <h5>{user.description}</h5>
-        <button
-          style={{
-            width: "150px",
-            borderRadius: "3px",
-            letterSpacing: "1.5px",
-            marginTop: "1rem",
-          }}
-          onClick={this.onLogoutClick}
-          className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-        >
-          Logout
-        </button>
+        <h5>{this.state.tutor.fullname}</h5>
+        <h5>{this.state.tutor.email}</h5>
+        <h5>{this.state.tutor.address}</h5>
+        <h5>{this.state.tutor.nic}</h5>
+        <h5>{this.state.tutor.dob}</h5>
+        <h5>{this.state.tutor.contact_number}</h5>
+        <h5>{this.state.tutor.gender}</h5>
+        <h5>{this.state.tutor.subjects}</h5>
+        <h5>{this.state.tutor.description}</h5>
       </div>
     );
   }
 }
 
+//These should be added to access the logged user
 TutorProfile.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
 };
+
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
-export default connect(mapStateToProps, { logoutUser })(
-  withRouter(TutorProfile)
-);
+
+export default connect(mapStateToProps)(withRouter(TutorProfile));

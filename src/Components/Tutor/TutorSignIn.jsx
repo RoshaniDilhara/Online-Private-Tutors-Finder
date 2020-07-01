@@ -24,13 +24,13 @@ class TutorSignIn extends Component {
   componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/tutorhome");
+      this.props.history.push(`/tutorhome/${this.props.auth.user.id}`);
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/tutorhome"); // push user to dashboard when they login
+      this.props.history.push(`/tutorhome/${nextProps.auth.user.id}`); // push user to dashboard when they login
     }
     if (nextProps.errors) {
       this.setState({

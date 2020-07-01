@@ -5,6 +5,7 @@ import TutorProfile from "./TutorProfile";
 import TeachingSubjects from "./TeachingSubjects";
 import StudentRequests from "./StudentRequests";
 import TutorAppoinments from "./TutorAppoinments";
+import ViewStudent from "./ViewStudent";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "./actions/tutorAuthActions";
@@ -126,6 +127,11 @@ class TutorHome extends Component {
                   exact
                   path="/tutorappoinments/:value"
                   component={TutorAppoinments}
+                />
+                <Route
+                  exact
+                  path="/viewstudentprofile/:value/:studentID"
+                  component={ViewStudent}
                 />
               </div>
             </div>

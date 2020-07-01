@@ -109,6 +109,11 @@ class StudentRequests extends Component {
                       <td>{myreq.address}</td>
 
                       <td>{myreq.contact_number}</td>
+                      <Link
+                        to={`/viewstudentprofile/${this.state.tutorID}/${myreq._id}`}
+                      >
+                        <button class="btn btn-primary">VIEW</button>
+                      </Link>
 
                       <button
                         class="btn btn-primary"

@@ -14,6 +14,7 @@ class TutorSignIn extends Component {
     this.state = {
       email: "",
       password: "",
+      errors: {},
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -23,13 +24,13 @@ class TutorSignIn extends Component {
   componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/tutorhome");
+      this.props.history.push(`/tutorhome/${this.props.auth.user.id}`);
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/tutorhome"); // push user to dashboard when they login
+      this.props.history.push(`/tutorhome/${nextProps.auth.user.id}`); // push user to dashboard when they login
     }
     if (nextProps.errors) {
       this.setState({
@@ -53,6 +54,8 @@ class TutorSignIn extends Component {
     this.props.loginUser(tutorData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
   }
   render() {
+    const { errors } = this.state;
+    //console.log(errors);
     return (
       <div class="login-wrap">
         <div class="login-html">
@@ -72,12 +75,17 @@ class TutorSignIn extends Component {
                 </label>
                 <input
                   id="user"
-                  type="text"
+                  type="email"
                   class="input"
                   name="email"
                   value={this.state.email}
+                  error={errors.email}
                   onChange={this.handleChange}
                 />
+                <span class="error-display">
+                  {errors.email}
+                  {errors.emailnotfound}
+                </span>
               </div>
               <div class="group">
                 <label for="pass" class="label">
@@ -90,8 +98,13 @@ class TutorSignIn extends Component {
                   data-type="password"
                   name="password"
                   value={this.state.password}
+                  error={errors.password}
                   onChange={this.handleChange}
                 />
+                <span class="error-display">
+                  {errors.password}
+                  {errors.passwordincorrect}
+                </span>
               </div>
               <div class="group">
                 <input id="check" type="checkbox" class="check" checked />

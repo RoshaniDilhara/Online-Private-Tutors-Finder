@@ -94,3 +94,5 @@ https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e366
 https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-2-frontend-6eac4e38ee82
 
 https://blog.bitsrc.io/build-a-login-auth-app-with-the-mern-stack-part-3-react-components-88190f8db718
+
+### `npm install react-avatar --save`

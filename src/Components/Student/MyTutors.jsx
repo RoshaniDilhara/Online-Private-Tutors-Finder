@@ -9,7 +9,7 @@ class MyTutors extends Component {
     this.state = {
       tutors: [],
       isLoading: false,
-      studentID: "abc1234",
+      studentID: this.props.match.params.value,
       accept: false,
       isSuccess: false,
       mytutors: [],
@@ -87,7 +87,9 @@ class MyTutors extends Component {
 
                       <td>{newtutor.address}</td>
                       <td>{newtutor.subjects}</td>
-                      <Link to={`/appoinments/${newtutor._id}`}>
+                      <Link
+                        to={`/appoinments/${newtutor._id}/${this.state.studentID}`}
+                      >
                         <button class="btn btn-primary">APPOINMENT</button>
                       </Link>
 

@@ -34,9 +34,9 @@ function App() {
           <Route path="/studentlogin" component={StudentLogin} />
           <Route path="/tutorlogin" component={TutorLogin} />
           <Route path="/tutorsignup" component={TutorSignUp} />
-          <Route path="/studentsection" component={StudentSection} />
+          <Route path="/studentsection/:value" component={StudentSection} />
           <Route path="/student-signup" component={StudentSignUp} />
-          <Route path="/tutorhome" component={TutorHome} />
+          <Route path="/tutorhome/:value" component={TutorHome} />
         </div>
       </Router>
     </Provider>

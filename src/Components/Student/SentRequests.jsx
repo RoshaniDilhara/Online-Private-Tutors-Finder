@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import api from "../api/tutorapi";
 import apirequest from "../api/requestsapi";
+
 class SentRequests extends Component {
   constructor(props) {
     super(props);
     this.state = {
       tutors: [],
       isLoading: false,
-      studentID: "abc1234",
+      studentID: this.props.match.params.value,
       accept: false,
       isSuccess: false,
       mytutors: [],
@@ -18,7 +19,7 @@ class SentRequests extends Component {
   deleteRequest(newtutor) {
     if (
       window.confirm(
-        `Do tou want to delete request to ${newtutor.fullname} permanently?`
+        `Do you want to delete request to ${newtutor.fullname} permanently?`
       )
     ) {
       apirequest.deleteRequestById(newtutor.req);

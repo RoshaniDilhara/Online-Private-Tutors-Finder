@@ -7,7 +7,7 @@ class FixedAppoinments extends Component {
   state = {
     tutors: [],
     appoinments: [],
-    studentID: "abc1234",
+    studentID: this.props.match.params.value,
     myappoinments: [],
   };
   deleteAppoinment(newappoinment) {
@@ -52,12 +52,11 @@ class FixedAppoinments extends Component {
         <div>
           <h5>
             <strong>
-              <Link to="/fixed-appoinments">
-                <font color="red">
-                  &nbsp;&nbsp;&nbsp;Fixed Appoinments{"     "}
-                </font>
-              </Link>
-              <Link to="/sentappoinments">
+              <font color="red">
+                &nbsp;&nbsp;&nbsp;Fixed Appoinments{"     "}
+              </font>
+
+              <Link to={`/sentappoinments/${this.state.studentID}`}>
                 <font color="purple">
                   &nbsp;&nbsp;&nbsp;Pending Appoinments
                 </font>

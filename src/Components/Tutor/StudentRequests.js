@@ -36,15 +36,19 @@ class StudentRequests extends Component {
   handleAccept = async (reqIndex, myreq) => {
     const { accept, myRequestsID } = this.state;
     const payload = { accept };
-    console.log(myRequestsID[reqIndex]._id);
-    await apirequest
-      .updateRequestById(myRequestsID[reqIndex]._id, payload)
-      .then((res) => {
-        window.confirm(
-          `You have accepted the student ${myreq.firstname} ${myreq.lastname}`
-        );
-        window.location.reload();
-      });
+    //console.log(myRequestsID[reqIndex]._id);
+
+    const val = window.confirm(
+      `You have accepted the student ${myreq.firstname} ${myreq.lastname}`
+    );
+
+    if (val == true) {
+      await apirequest
+        .updateRequestById(myRequestsID[reqIndex]._id, payload)
+        .then((res) => {
+          window.location.reload();
+        });
+    }
   };
   render() {
     const {
@@ -54,7 +58,7 @@ class StudentRequests extends Component {
       myRequests,
       tutorID,
     } = this.state;
-    console.log(tutorID);
+    //console.log(tutorID);
     //console.log(requests);
     requests.map((req) => {
       if (req.tutorID == tutorID && req.accept == false) {
@@ -70,7 +74,7 @@ class StudentRequests extends Component {
         }
       });
     });
-    console.log(myRequests);
+    //console.log(myRequests);
 
     return (
       <div>

@@ -34,15 +34,19 @@ class TutorAppoinments extends Component {
   handleAccept = async (reqIndex, myreq) => {
     const { accept, myAppoinID } = this.state;
     const payload = { accept };
-    console.log(myAppoinID[reqIndex]._id);
-    await apisappoinment
-      .updateAppoinmentById(myAppoinID[reqIndex]._id, payload)
-      .then((res) => {
-        window.confirm(
-          `You have accepted the appoinment by ${myreq.firstname} ${myreq.lastname}`
-        );
-        window.location.reload();
-      });
+    //console.log(myAppoinID[reqIndex]._id);
+
+    const val = window.confirm(
+      `You have accepted the appoinment by ${myreq.firstname} ${myreq.lastname}`
+    );
+
+    if (val == true) {
+      await apisappoinment
+        .updateAppoinmentById(myAppoinID[reqIndex]._id, payload)
+        .then((res) => {
+          window.location.reload();
+        });
+    }
   };
 
   render() {

@@ -129,19 +129,18 @@ class StudentRequests extends Component {
                       <Link
                         to={`/viewstudentprofile/${this.state.tutorID}/${myreq._id}`}
                       >
-                        <button class="btn btn-primary">VIEW</button>
+                        <button class="btn btn-info">VIEW</button>
                       </Link>
 
                       <button
-                        class="btn btn-primary"
-                        color="primary"
+                        class="btn btn-success"
                         onClick={this.handleAccept.bind(this, index, myreq)}
                       >
                         ACCEPT
                       </button>
 
                       <button
-                        class="btn btn-danger"
+                        class="btn btn-warning"
                         onClick={this.ignoreStudentReq.bind(this, index, myreq)}
                       >
                         IGNORE

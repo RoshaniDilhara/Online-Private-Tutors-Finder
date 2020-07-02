@@ -165,7 +165,7 @@ class TutorAppoinments extends Component {
                         <Link
                           to={`/viewstudentprofile/${this.state.tutorID}/${myreq.id}`}
                         >
-                          <button class="btn btn-primary">VIEW</button>
+                          <button class="btn btn-info">VIEW</button>
                         </Link>
 
                         <button
@@ -176,7 +176,7 @@ class TutorAppoinments extends Component {
                             myreq
                           )}
                         >
-                          Cancel
+                          CANCEL
                         </button>
                       </tr>
                     );

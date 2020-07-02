@@ -73,7 +73,7 @@ class MyStudents extends Component {
         <div>
           <h4>
             <strong>
-              <font color="blue">&nbsp;&nbsp;&nbsp;STUDENT REQUESTS</font>
+              <font color="blue">&nbsp;&nbsp;&nbsp;MY STUDENTS</font>
             </strong>
           </h4>
         </div>
@@ -108,14 +108,14 @@ class MyStudents extends Component {
                       <Link
                         to={`/viewstudentprofile/${this.state.tutorID}/${myreq._id}`}
                       >
-                        <button class="btn btn-primary">VIEW</button>
+                        <button class="btn btn-info">VIEW</button>
                       </Link>
 
                       <button
                         class="btn btn-danger"
                         onClick={this.deleteStudentReq.bind(this, index, myreq)}
                       >
-                        Delete
+                        DELETE
                       </button>
                     </tr>
                   );

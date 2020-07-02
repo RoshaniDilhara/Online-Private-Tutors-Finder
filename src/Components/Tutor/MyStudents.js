@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import apirequest from "../api/requestsapi";
 import apistudents from "../api/studentapi";
 import api from "../api/tutorapi";
 
-class StudentRequests extends Component {
+class MyStudents extends Component {
   constructor(props) {
     super(props);
     //const { user } = this.props.auth;
@@ -15,7 +13,6 @@ class StudentRequests extends Component {
       requests: [],
       myRequestsID: [],
       myRequests: [],
-      accept: true,
       tutorID: this.props.match.params.value,
     };
   }
@@ -33,25 +30,7 @@ class StudentRequests extends Component {
     });
   };
 
-  handleAccept = async (reqIndex, myreq) => {
-    const { accept, myRequestsID } = this.state;
-    const payload = { accept };
-    //console.log(myRequestsID[reqIndex]._id);
-
-    const val = window.confirm(
-      `You have accepted the student ${myreq.firstname} ${myreq.lastname}`
-    );
-
-    if (val == true) {
-      await apirequest
-        .updateRequestById(myRequestsID[reqIndex]._id, payload)
-        .then((res) => {
-          window.location.reload();
-        });
-    }
-  };
-
-  ignoreStudentReq(reqIndex, myreq) {
+  deleteStudentReq(reqIndex, myreq) {
     const { myRequestsID } = this.state;
     if (
       window.confirm(
@@ -74,7 +53,7 @@ class StudentRequests extends Component {
     //console.log(tutorID);
     //console.log(requests);
     requests.map((req) => {
-      if (req.tutorID == tutorID && req.accept == false) {
+      if (req.tutorID == tutorID && req.accept == true) {
         myRequestsID.push(req);
       }
     });
@@ -133,18 +112,10 @@ class StudentRequests extends Component {
                       </Link>
 
                       <button
-                        class="btn btn-primary"
-                        color="primary"
-                        onClick={this.handleAccept.bind(this, index, myreq)}
-                      >
-                        ACCEPT
-                      </button>
-
-                      <button
                         class="btn btn-danger"
-                        onClick={this.ignoreStudentReq.bind(this, index, myreq)}
+                        onClick={this.deleteStudentReq.bind(this, index, myreq)}
                       >
-                        IGNORE
+                        Delete
                       </button>
                     </tr>
                   );
@@ -158,13 +129,4 @@ class StudentRequests extends Component {
   }
 }
 
-//These should be added to access the logged user
-StudentRequests.propTypes = {
-  auth: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
-
-export default connect(mapStateToProps)(withRouter(StudentRequests));
+export default MyStudents;

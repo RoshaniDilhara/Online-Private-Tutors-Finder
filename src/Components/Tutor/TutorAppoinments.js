@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, HashRouter, Route } from "react-router-dom";
 import apistudents from "../api/studentapi";
 import api from "../api/tutorapi";
 import apisappoinment from "../api/appoinmentapi";
 
 class TutorAppoinments extends Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
     //const { user } = this.props.auth;
@@ -13,12 +14,13 @@ class TutorAppoinments extends Component {
       appoinments: [],
       myAppoinID: [],
       myAppoinStudents: [],
-      accept: true,
+
       tutorID: this.props.match.params.value,
     };
   }
 
   componentDidMount = async () => {
+    this._isMounted = true;
     await apistudents.getAllStudent().then((students) => {
       this.setState({
         students: students.data.data,
@@ -31,24 +33,24 @@ class TutorAppoinments extends Component {
     });
   };
 
-  handleAccept = async (reqIndex, myreq) => {
-    const { accept, myAppoinID } = this.state;
-    const payload = { accept };
-    //console.log(myAppoinID[reqIndex]._id);
+  componentWillUnmount() {
+    this._isMounted = false;
+    this.setState = (state, callback) => {
+      return;
+    };
+  }
 
-    const val = window.confirm(
-      `You have accepted the appoinment by ${myreq.firstname} ${myreq.lastname}`
-    );
-
-    if (val == true) {
-      await apisappoinment
-        .updateAppoinmentById(myAppoinID[reqIndex]._id, payload)
-        .then((res) => {
-          window.location.reload();
-        });
+  cancelAppoinment(reqIndex, myreq) {
+    const { myAppoinID } = this.state;
+    if (
+      window.confirm(
+        `Do you want to  permanently delete the appoinment by ${myreq.firstname} ${myreq.lastname}?`
+      )
+    ) {
+      apisappoinment.deleteAppoinmentById(myAppoinID[reqIndex]._id);
+      window.location.reload();
     }
-  };
-
+  }
   render() {
     const {
       students,
@@ -59,7 +61,7 @@ class TutorAppoinments extends Component {
     } = this.state;
 
     appoinments.map((req) => {
-      if (req.tutorID == tutorID && req.accept == false) {
+      if (req.tutorID == tutorID && req.accept == true) {
         myAppoinID.push(req);
       }
     });
@@ -93,72 +95,96 @@ class TutorAppoinments extends Component {
         <div>
           <h4>
             <strong>
-              <font color="blue">&nbsp;&nbsp;&nbsp;APPOINMENT REQUESTS</font>
+              <font color="blue">&nbsp;&nbsp;&nbsp;Appoinments</font>
             </strong>
           </h4>
+          <hr color="blue" />
         </div>
         <div>
-          <table class="table table-stripe">
-            <tr>
-              <th>
-                <font color="lightseagreen">Name</font>
-              </th>
-              <th>
-                <font color="lightseagreen">Date</font>
-              </th>
+          <h5>
+            <strong>
+              <Link to={`/tutorappoinments/${this.state.tutorID}`}>
+                <font color="red">
+                  &nbsp;&nbsp;&nbsp;My Appoinments{"     "}
+                </font>
+              </Link>
 
-              <th>
-                <font color="lightseagreen">Start Time</font>
-              </th>
-              <th>
-                <font color="lightseagreen">End Time</font>
-              </th>
-              <th>
-                <font color="lightseagreen">Venue</font>
-              </th>
-              <th>
-                <font color="lightseagreen">Subject</font>
-              </th>
-            </tr>
+              <Link to={`/appoinmentreq/${this.state.tutorID}`}>
+                <font color="purple">
+                  &nbsp;&nbsp;&nbsp;Pending Appoinments
+                </font>
+              </Link>
+            </strong>
+          </h5>
+          <hr color="blue" />
+        </div>
+        <div>
+          <div>
+            <table class="table table-stripe">
+              <tr>
+                <th>
+                  <font color="lightseagreen">Name</font>
+                </th>
+                <th>
+                  <font color="lightseagreen">Date</font>
+                </th>
 
-            <tbody>
-              {this.state.myAppoinStudents.map((myreq) => {
-                if (myreq._id != "") {
-                  const index = myAppoinStudents.indexOf(myreq);
-                  return (
-                    <tr>
-                      <td>
-                        {myreq.firstname} {myreq.lastname}
-                      </td>
+                <th>
+                  <font color="lightseagreen">Start Time</font>
+                </th>
+                <th>
+                  <font color="lightseagreen">End Time</font>
+                </th>
+                <th>
+                  <font color="lightseagreen">Venue</font>
+                </th>
+                <th>
+                  <font color="lightseagreen">Subject</font>
+                </th>
+              </tr>
 
-                      <td>{myreq.date}</td>
+              <tbody>
+                {this.state.myAppoinStudents.map((myreq) => {
+                  if (myreq._id != "") {
+                    const index = myAppoinStudents.indexOf(myreq);
+                    return (
+                      <tr>
+                        <td>
+                          {myreq.firstname} {myreq.lastname}
+                        </td>
 
-                      <td>{myreq.startTime}</td>
+                        <td>{myreq.date}</td>
 
-                      <td>{myreq.endTime}</td>
+                        <td>{myreq.startTime}</td>
 
-                      <td>{myreq.venue}</td>
+                        <td>{myreq.endTime}</td>
 
-                      <td>{myreq.subject}</td>
-                      <Link
-                        to={`/viewstudentprofile/${this.state.tutorID}/${myreq.id}`}
-                      >
-                        <button class="btn btn-primary">VIEW</button>
-                      </Link>
+                        <td>{myreq.venue}</td>
 
-                      <button
-                        class="btn btn-primary"
-                        color="primary"
-                        onClick={this.handleAccept.bind(this, index, myreq)}
-                      >
-                        ACCEPT
-                      </button>
-                    </tr>
-                  );
-                }
-              })}
-            </tbody>
-          </table>
+                        <td>{myreq.subject}</td>
+                        <Link
+                          to={`/viewstudentprofile/${this.state.tutorID}/${myreq.id}`}
+                        >
+                          <button class="btn btn-primary">VIEW</button>
+                        </Link>
+
+                        <button
+                          class="btn btn-danger"
+                          onClick={this.cancelAppoinment.bind(
+                            this,
+                            index,
+                            myreq
+                          )}
+                        >
+                          Cancel
+                        </button>
+                      </tr>
+                    );
+                  }
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     );

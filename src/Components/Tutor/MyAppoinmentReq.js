@@ -129,9 +129,7 @@ class MyAppoinmentReq extends Component {
                 </font>
               </Link>
 
-              <Link to={`/appoinmentreq/${this.state.tutorID}`}>
-                <font color="red">&nbsp;&nbsp;&nbsp;Pending Appoinments</font>
-              </Link>
+              <font color="red">&nbsp;&nbsp;&nbsp;Pending Appoinments</font>
             </strong>
           </h5>
           <hr color="blue" />

@@ -103,11 +103,7 @@ class TutorAppoinments extends Component {
         <div>
           <h5>
             <strong>
-              <Link to={`/tutorappoinments/${this.state.tutorID}`}>
-                <font color="red">
-                  &nbsp;&nbsp;&nbsp;My Appoinments{"     "}
-                </font>
-              </Link>
+              <font color="red">&nbsp;&nbsp;&nbsp;My Appoinments{"     "}</font>
 
               <Link to={`/appoinmentreq/${this.state.tutorID}`}>
                 <font color="purple">

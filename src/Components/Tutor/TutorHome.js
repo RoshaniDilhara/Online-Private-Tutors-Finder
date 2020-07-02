@@ -23,7 +23,6 @@ class TutorHome extends Component {
       tutorID: this.props.match.params.value,
       tutor: {},
     };
-    //console.log(this.state.tutorID);
   }
 
   onLogoutClick = (e) => {
@@ -41,6 +40,7 @@ class TutorHome extends Component {
   };
 
   render() {
+    console.log(this.state.tutor);
     return (
       <div>
         <div>

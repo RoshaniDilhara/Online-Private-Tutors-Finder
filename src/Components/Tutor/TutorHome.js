@@ -5,12 +5,15 @@ import TutorProfile from "./TutorProfile";
 import TeachingSubjects from "./TeachingSubjects";
 import StudentRequests from "./StudentRequests";
 import TutorAppoinments from "./TutorAppoinments";
+import ViewStudent from "./ViewStudent";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "./actions/tutorAuthActions";
 import { Row, Col, Container, Button, Image } from "react-bootstrap";
 import Avatar from "react-avatar";
 import api from "../api/tutorapi";
+import MyAppoinmentReq from "./MyAppoinmentReq";
+import MyStudents from "./MyStudents";
 
 class TutorHome extends Component {
   constructor(props) {
@@ -20,7 +23,6 @@ class TutorHome extends Component {
       tutorID: this.props.match.params.value,
       tutor: {},
     };
-    //console.log(this.state.tutorID);
   }
 
   onLogoutClick = (e) => {
@@ -38,6 +40,7 @@ class TutorHome extends Component {
   };
 
   render() {
+    console.log(this.state.tutor);
     return (
       <div>
         <div>
@@ -72,10 +75,19 @@ class TutorHome extends Component {
               <div className="linkside">
                 <div className="gap">
                   <Link
-                    to={`/tutorssubjects/${this.state.tutorID}`}
+                    to={`/tutorprofile/${this.state.tutorID}`}
                     className="waves-effect waves-light btn-small"
                   >
-                    <font color="blue">SUBJECTS</font>
+                    <font color="blue">MY PROFILE</font>
+                  </Link>
+                </div>
+
+                <div className="gap">
+                  <Link
+                    to={`/mystudents/${this.state.tutorID}`}
+                    className="waves-effect waves-light btn-small"
+                  >
+                    <font color="blue">MY STUDENTS</font>
                   </Link>
                 </div>
 
@@ -97,10 +109,10 @@ class TutorHome extends Component {
                 </div>
                 <div className="gap">
                   <Link
-                    to={`/tutorprofile/${this.state.tutorID}`}
+                    to={`/tutorssubjects/${this.state.tutorID}`}
                     className="waves-effect waves-light btn-small"
                   >
-                    <font color="blue">PROFILE</font>
+                    <font color="blue">SUBJECTS</font>
                   </Link>
                 </div>
               </div>
@@ -110,6 +122,8 @@ class TutorHome extends Component {
                   path="/tutorssubjects/:value"
                   component={TeachingSubjects}
                 />
+
+                <Route exact path="/mystudents/:value" component={MyStudents} />
 
                 <Route
                   exact
@@ -126,6 +140,16 @@ class TutorHome extends Component {
                   exact
                   path="/tutorappoinments/:value"
                   component={TutorAppoinments}
+                />
+                <Route
+                  exact
+                  path="/viewstudentprofile/:value/:studentID"
+                  component={ViewStudent}
+                />
+                <Route
+                  exact
+                  path="/appoinmentreq/:value"
+                  component={MyAppoinmentReq}
                 />
               </div>
             </div>

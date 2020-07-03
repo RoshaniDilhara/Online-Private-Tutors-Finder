@@ -21,6 +21,7 @@ class TutorSignUp extends Component {
       gender: "",
       subjects: "",
       description: "",
+      accept: false,
       errors: {},
     };
 
@@ -54,6 +55,7 @@ class TutorSignUp extends Component {
       gender: this.state.gender,
       subjects: this.state.subjects,
       description: this.state.description,
+      accept: this.state.accept,
     };
     console.log(newTutor);
     this.props.registerUser(newTutor, this.props.history);

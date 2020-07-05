@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import apirequest from "../api/requestsapi";
 import apistudents from "../api/studentapi";
 import api from "../api/tutorapi";
+import _ from "lodash";
 
 class MyStudents extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class MyStudents extends Component {
       students: [],
       requests: [],
       myRequestsID: [],
-      myRequests: [],
+      myStudents: [],
       tutorID: this.props.match.params.value,
     };
   }
@@ -47,7 +48,7 @@ class MyStudents extends Component {
       requests,
       students,
       myRequestsID,
-      myRequests,
+      myStudents,
       tutorID,
     } = this.state;
     //console.log(tutorID);
@@ -62,11 +63,13 @@ class MyStudents extends Component {
     myRequestsID.map((myr) => {
       students.map((student) => {
         if (student._id == myr.studentID) {
-          myRequests.push(student);
+          myStudents.push(student);
         }
       });
     });
     //console.log(myRequests);
+
+    const myRequests = _.uniq(myStudents);
 
     return (
       <div>
@@ -93,7 +96,7 @@ class MyStudents extends Component {
             </tr>
 
             <tbody>
-              {this.state.myRequests.map((myreq) => {
+              {myRequests.map((myreq) => {
                 if (myreq._id != "") {
                   const index = myRequests.indexOf(myreq);
                   return (

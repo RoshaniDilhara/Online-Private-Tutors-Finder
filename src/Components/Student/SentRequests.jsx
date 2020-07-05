@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import api from "../api/tutorapi";
 import apirequest from "../api/requestsapi";
+import _ from "lodash";
 
 class SentRequests extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class SentRequests extends Component {
       studentID: this.props.match.params.value,
       accept: false,
       isSuccess: false,
-      mytutors: [],
+      mytutorsDup: [],
       requests: [],
     };
   }
@@ -42,7 +43,7 @@ class SentRequests extends Component {
     });
   };
   render() {
-    const { tutors, isLoading, requests, mytutors } = this.state;
+    const { tutors, isLoading, requests, mytutorsDup } = this.state;
 
     this.state.requests.map((req) => {
       if (req.studentID == this.state.studentID && !req.accept) {
@@ -50,11 +51,14 @@ class SentRequests extends Component {
           if (tut._id == req.tutorID) {
             tut.date = req.date;
             tut.req = req._id;
-            mytutors.push(tut);
+            mytutorsDup.push(tut);
           }
         });
       }
     });
+
+    const mytutors = _.uniq(mytutorsDup);
+
     return (
       <div>
         <div>
@@ -66,7 +70,7 @@ class SentRequests extends Component {
           <hr color="blue" />
         </div>
         <div>
-          {this.state.mytutors.map((newtutor) => {
+          {mytutors.map((newtutor) => {
             if (newtutor._id != "") {
               var day = newtutor.date.substr(0, 10);
               var time = newtutor.date.substr(11, 11);

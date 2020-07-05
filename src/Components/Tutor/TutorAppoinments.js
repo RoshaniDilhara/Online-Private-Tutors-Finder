@@ -3,69 +3,65 @@ import { Link, HashRouter, Route } from "react-router-dom";
 import apistudents from "../api/studentapi";
 import api from "../api/tutorapi";
 import apisappoinment from "../api/appoinmentapi";
+import _ from "lodash";
 
 class TutorAppoinments extends Component {
-  _isMounted = false;
   constructor(props) {
     super(props);
     //const { user } = this.props.auth;
     this.state = {
-      students: [],
-      appoinments: [],
-      myAppoinID: [],
-      myAppoinStudents: [],
-
+      studentsDup: [],
+      appoinmentsDup: [],
+      myAppoinIDDup: [],
+      myAppoinStudentsDup: [],
       tutorID: this.props.match.params.value,
     };
   }
 
   componentDidMount = async () => {
-    this._isMounted = true;
     await apistudents.getAllStudent().then((students) => {
       this.setState({
-        students: students.data.data,
+        studentsDup: students.data.data,
       });
     });
     await apisappoinment.getAllAppoinment().then((appoinments) => {
       this.setState({
-        appoinments: appoinments.data.data,
+        appoinmentsDup: appoinments.data.data,
       });
     });
   };
 
-  componentWillUnmount() {
-    this._isMounted = false;
-    this.setState = (state, callback) => {
-      return;
-    };
-  }
-
   cancelAppoinment(reqIndex, myreq) {
-    const { myAppoinID } = this.state;
+    const { myAppoinIDDup } = this.state;
     if (
       window.confirm(
         `Do you want to  permanently delete the appoinment by ${myreq.firstname} ${myreq.lastname}?`
       )
     ) {
-      apisappoinment.deleteAppoinmentById(myAppoinID[reqIndex]._id);
+      apisappoinment.deleteAppoinmentById(myAppoinIDDup[reqIndex]._id);
       window.location.reload();
     }
   }
   render() {
     const {
-      students,
-      appoinments,
-      myAppoinID,
-      myAppoinStudents,
+      studentsDup,
+      appoinmentsDup,
+      myAppoinIDDup,
+      myAppoinStudentsDup,
       tutorID,
     } = this.state;
 
+    const students = _.uniq(studentsDup);
+    const appoinments = _.uniq(appoinmentsDup);
+
     appoinments.map((req) => {
       if (req.tutorID == tutorID && req.accept == true) {
-        myAppoinID.push(req);
+        myAppoinIDDup.push(req);
       }
     });
 
+    const myAppoinID = _.uniq(myAppoinIDDup);
+    //console.log(myAppoinID.length);
     myAppoinID.map((myr) => {
       students.map((student) => {
         if (student._id == myr.studentID) {
@@ -85,10 +81,18 @@ class TutorAppoinments extends Component {
             venue: myr.venue,
             subject: myr.subject,
           };
-          myAppoinStudents.push(appoin);
+
+          myAppoinStudentsDup.push(appoin);
         }
       });
     });
+    //console.log(myAppoinStudentsDup);
+    const myAppoinStudentsU = _.uniq(myAppoinStudentsDup);
+    //console.log(myAppoinStudents.length - myAppoinID.length);
+    const myAppoinStudents = _.dropRight(
+      myAppoinStudentsU,
+      myAppoinStudentsU.length - myAppoinID.length
+    );
 
     return (
       <div>
@@ -140,7 +144,7 @@ class TutorAppoinments extends Component {
               </tr>
 
               <tbody>
-                {this.state.myAppoinStudents.map((myreq) => {
+                {myAppoinStudents.map((myreq) => {
                   if (myreq._id != "") {
                     const index = myAppoinStudents.indexOf(myreq);
                     return (

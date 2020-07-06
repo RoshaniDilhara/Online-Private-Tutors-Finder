@@ -105,6 +105,6 @@ https://blog.bitsrc.io/build-a-login-auth-app-with-the-mern-stack-part-3-react-c
 
 ### `npm install cors uuid multer`
 
-## Referd
+## Refered
 https://www.positronx.io/react-file-upload-tutorial-with-node-express-and-multer/
 

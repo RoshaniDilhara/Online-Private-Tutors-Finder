@@ -100,3 +100,7 @@ https://blog.bitsrc.io/build-a-login-auth-app-with-the-mern-stack-part-3-react-c
 ### `npm install reactjs-popup --save`
 
 ### `npm i react-select`
+
+### `npm install bootstrap --save`
+
+### `npm install cors uuid multer`

@@ -5,6 +5,7 @@ import { Link, withRouter } from "react-router-dom";
 import apirequest from "../api/requestsapi";
 import apistudents from "../api/studentapi";
 import api from "../api/tutorapi";
+import _ from "lodash";
 
 class StudentRequests extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class StudentRequests extends Component {
       students: [],
       requests: [],
       myRequestsID: [],
-      myRequests: [],
+      myRequestsDup: [],
       accept: true,
       tutorID: this.props.match.params.value,
     };
@@ -68,7 +69,7 @@ class StudentRequests extends Component {
       requests,
       students,
       myRequestsID,
-      myRequests,
+      myRequestsDup,
       tutorID,
     } = this.state;
     //console.log(tutorID);
@@ -83,11 +84,13 @@ class StudentRequests extends Component {
     myRequestsID.map((myr) => {
       students.map((student) => {
         if (student._id == myr.studentID) {
-          myRequests.push(student);
+          myRequestsDup.push(student);
         }
       });
     });
     //console.log(myRequests);
+
+    const myRequests = _.uniq(myRequestsDup);
 
     return (
       <div>
@@ -114,7 +117,7 @@ class StudentRequests extends Component {
             </tr>
 
             <tbody>
-              {this.state.myRequests.map((myreq) => {
+              {myRequests.map((myreq) => {
                 if (myreq._id != "") {
                   const index = myRequests.indexOf(myreq);
                   return (

@@ -89,13 +89,20 @@ class SearchTutors extends Component {
 
             <tbody>
               {this.state.tutors.map((newtutor) => {
-                if (newtutor._id != "") {
+                if (newtutor._id != "" && newtutor.accept == true) {
+                  let subjects = newtutor.subjects;
+                  let subjlen = subjects.length;
+                  var i;
+                  var text = "";
+                  for (i = 0; i < subjlen; i++) {
+                    text += subjects[i].label + ";";
+                  }
                   return (
                     <tr>
                       <td>{newtutor.fullname}</td>
 
                       <td>{newtutor.address}</td>
-                      <td>{newtutor.subjects}</td>
+                      <td>{text}</td>
                       <td>{newtutor.description}</td>
 
                       <button

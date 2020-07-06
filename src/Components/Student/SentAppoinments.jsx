@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { Link, HashRouter, Route, withRouter } from "react-router-dom";
 import apiappoinment from "../api/appoinmentapi";
 import api from "../api/tutorapi";
+import _ from "lodash";
 
 class SentAppoinments extends Component {
   state = {
     tutors: [],
     appoinments: [],
     studentID: this.props.match.params.value,
-    myappoinments: [],
+    myappoinmentsDup: [],
   };
   deleteAppoinment(newappoinment) {
     if (window.confirm(`Do you want to delete this appoinment permanently?`)) {
@@ -29,16 +30,19 @@ class SentAppoinments extends Component {
     });
   };
   render() {
-    const { myappoinments } = this.state;
+    const { myappoinmentsDup } = this.state;
     this.state.tutors.map((newtutor) => {
       this.state.appoinments.map((appoin) => {
         if (newtutor._id == appoin.tutorID) {
           appoin.tutorname = newtutor.fullname;
           appoin.contact = newtutor.contact_number;
-          myappoinments.push(appoin);
+          myappoinmentsDup.push(appoin);
         }
       });
     });
+
+    const myappoinments = _.uniq(myappoinmentsDup);
+
     return (
       <div>
         <div>
@@ -64,7 +68,7 @@ class SentAppoinments extends Component {
           <hr color="blue" />
         </div>
         <div>
-          {this.state.myappoinments.map((newappoinment) => {
+          {myappoinments.map((newappoinment) => {
             var day = newappoinment.date.substr(0, 10);
             if (
               newappoinment._id != "" &&
@@ -85,7 +89,7 @@ class SentAppoinments extends Component {
                   </div>
                   <div>
                     <font color="lightseagreen">Subjects : </font>
-                    <font color="black">{newappoinment.subject}</font>
+                    <font color="black">{newappoinment.subject.label}</font>
                   </div>
                   <div>
                     <font color="lightseagreen">Venue : </font>

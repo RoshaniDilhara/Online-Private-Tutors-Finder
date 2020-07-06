@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import apistudents from "../api/studentapi";
 import api from "../api/tutorapi";
 import apisappoinment from "../api/appoinmentapi";
+import _ from "lodash";
 
 class MyAppoinmentReq extends Component {
   _isMounted = false;
@@ -14,7 +15,7 @@ class MyAppoinmentReq extends Component {
       students: [],
       appoinments: [],
       myAppoinID: [],
-      myAppoinStudents: [],
+      myAppoinStudentsDup: [],
       accept: true,
       tutorID: this.props.match.params.value,
     };
@@ -76,7 +77,7 @@ class MyAppoinmentReq extends Component {
       students,
       appoinments,
       myAppoinID,
-      myAppoinStudents,
+      myAppoinStudentsDup,
       tutorID,
     } = this.state;
 
@@ -103,12 +104,15 @@ class MyAppoinmentReq extends Component {
             startTime: myr.startTime,
             endTime: myr.endTime,
             venue: myr.venue,
-            subject: myr.subject,
+            subject_id: myr.subject.value,
+            subject_Name: myr.subject.label,
           };
-          myAppoinStudents.push(appoin);
+          myAppoinStudentsDup.push(appoin);
         }
       });
     });
+
+    const myAppoinStudents = _.uniq(myAppoinStudentsDup);
 
     return (
       <div>
@@ -154,21 +158,25 @@ class MyAppoinmentReq extends Component {
                 <font color="lightseagreen">Venue</font>
               </th>
               <th>
-                <font color="lightseagreen">Subject</font>
+                <font color="lightseagreen">Subject ID</font>
+              </th>
+              <th>
+                <font color="lightseagreen">Subject Name</font>
               </th>
             </tr>
 
             <tbody>
-              {this.state.myAppoinStudents.map((myreq) => {
+              {myAppoinStudents.map((myreq) => {
                 if (myreq._id != "") {
                   const index = myAppoinStudents.indexOf(myreq);
+                  const date = myreq.date.split("T")[0];
                   return (
                     <tr>
                       <td>
                         {myreq.firstname} {myreq.lastname}
                       </td>
 
-                      <td>{myreq.date}</td>
+                      <td>{date}</td>
 
                       <td>{myreq.startTime}</td>
 
@@ -176,7 +184,8 @@ class MyAppoinmentReq extends Component {
 
                       <td>{myreq.venue}</td>
 
-                      <td>{myreq.subject}</td>
+                      <td>{myreq.subject_id}</td>
+                      <td>{myreq.subject_Name}</td>
                       <Link
                         to={`/viewstudentprofile/${this.state.tutorID}/${myreq.id}`}
                       >

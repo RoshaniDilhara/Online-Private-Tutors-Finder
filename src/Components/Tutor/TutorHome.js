@@ -14,6 +14,7 @@ import Avatar from "react-avatar";
 import api from "../api/tutorapi";
 import MyAppoinmentReq from "./MyAppoinmentReq";
 import MyStudents from "./MyStudents";
+import MyNotes from "./MyNotes";
 
 class TutorHome extends Component {
   constructor(props) {
@@ -115,6 +116,14 @@ class TutorHome extends Component {
                     <font color="blue">SUBJECTS</font>
                   </Link>
                 </div>
+                <div className="gap">
+                  <Link
+                    to={`/tutor-notes/${this.state.tutorID}`}
+                    className="waves-effect waves-light btn-small"
+                  >
+                    <font color="blue">MY NOTES</font>
+                  </Link>
+                </div>
               </div>
               <div className="barside">
                 <Route
@@ -151,6 +160,7 @@ class TutorHome extends Component {
                   path="/appoinmentreq/:value"
                   component={MyAppoinmentReq}
                 />
+                <Route exact path="/tutor-notes/:value" component={MyNotes} />
               </div>
             </div>
           </HashRouter>

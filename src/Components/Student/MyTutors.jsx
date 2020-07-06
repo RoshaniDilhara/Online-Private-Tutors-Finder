@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import api from "../api/tutorapi";
 import apirequest from "../api/requestsapi";
 import { Link } from "react-router-dom";
+import _ from "lodash";
 
 class MyTutors extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class MyTutors extends Component {
       studentID: this.props.match.params.value,
       accept: false,
       isSuccess: false,
-      mytutors: [],
+      mytutorsDup: [],
       requests: [],
       isAppoinment: false,
     };
@@ -43,18 +44,21 @@ class MyTutors extends Component {
     });
   };
   render() {
-    const { tutors, isLoading, requests, mytutors } = this.state;
+    const { tutors, isLoading, requests, mytutorsDup } = this.state;
 
     this.state.requests.map((req) => {
       if (req.studentID == this.state.studentID && req.accept) {
         this.state.tutors.map((tut) => {
           if (tut._id == req.tutorID) {
             tut.req = req._id;
-            mytutors.push(tut);
+            mytutorsDup.push(tut);
           }
         });
       }
     });
+
+    const mytutors = _.uniq(mytutorsDup);
+
     return (
       <div>
         <div>
@@ -79,14 +83,21 @@ class MyTutors extends Component {
             </tr>
 
             <tbody>
-              {this.state.mytutors.map((newtutor) => {
+              {mytutors.map((newtutor) => {
                 if (newtutor._id != "") {
+                  let subjects = newtutor.subjects;
+                  let subjlen = subjects.length;
+                  var i;
+                  var text = "";
+                  for (i = 0; i < subjlen; i++) {
+                    text += subjects[i].label + ";";
+                  }
                   return (
                     <tr>
                       <td>{newtutor.fullname}</td>
 
                       <td>{newtutor.address}</td>
-                      <td>{newtutor.subjects}</td>
+                      <td>{text}</td>
                       <Link
                         to={`/appoinments/${newtutor._id}/${this.state.studentID}`}
                       >

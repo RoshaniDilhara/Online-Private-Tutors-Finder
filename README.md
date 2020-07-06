@@ -98,3 +98,5 @@ https://blog.bitsrc.io/build-a-login-auth-app-with-the-mern-stack-part-3-react-c
 ### `npm install react-avatar --save`
 
 ### `npm install reactjs-popup --save`
+
+### `npm i react-select`

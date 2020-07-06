@@ -74,6 +74,14 @@ class SentRequests extends Component {
             if (newtutor._id != "") {
               var day = newtutor.date.substr(0, 10);
               var time = newtutor.date.substr(11, 11);
+              let subjects = newtutor.subjects;
+              let subjlen = subjects.length;
+              var i;
+              var text = "";
+              for (i = 0; i < subjlen; i++) {
+                text += subjects[i].label + ";";
+              }
+
               return (
                 <div>
                   <div>
@@ -82,7 +90,7 @@ class SentRequests extends Component {
                   </div>
                   <div>
                     <font color="lightseagreen">Subjects : </font>
-                    <font color="black">{newtutor.subjects}</font>
+                    <font color="black">{text}</font>
                   </div>
                   <div>
                     <font color="lightseagreen">Address : </font>

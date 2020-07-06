@@ -3,6 +3,8 @@ import "../Tutor/TutorSignIn.css";
 import DatePicker from "react-date-picker";
 import TimePicker from "react-time-picker";
 import apiappoinment from "../api/appoinmentapi";
+import Select from "react-select";
+import api from "../api/tutorapi";
 
 class AppoinmentForm extends Component {
   constructor(props) {
@@ -14,10 +16,14 @@ class AppoinmentForm extends Component {
       endTime: "10:00",
       tutorID: this.props.match.params.value,
       venue: "",
-      subject: "",
+      subject: null,
       accept: false,
+      subjects: [],
+      selectedOption: "",
+      tutor: [],
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
   handleChange(e) {
@@ -34,6 +40,13 @@ class AppoinmentForm extends Component {
   onDateChange = (date) => this.setState({ date });
   onStartTimeChange = (startTime) => this.setState({ startTime });
   onEndTimeChange = (endTime) => this.setState({ endTime });
+
+  handleSelect = (selectedOption) => {
+    this.setState({
+      subject: selectedOption,
+    });
+    console.log(`Option selected:`, selectedOption);
+  };
 
   handleSubmit = async () => {
     const {
@@ -62,27 +75,34 @@ class AppoinmentForm extends Component {
       window.location.reload();
     });
   };
+  componentDidMount = async () => {
+    await api.getTutorById(this.state.tutorID).then((tut) => {
+      this.setState({
+        tutor: tut.data.data,
+      });
+    });
+    this.setState({
+      subjects: this.state.tutor.subjects,
+    });
+  };
   render() {
     return (
       <div class="login-wrap">
         <div class="login-html">
           <label for="tab-1" class="tab">
-            APPOINMENT
+            APPOINMENT To {this.state.tutor.fullname}
           </label>
 
           <div class="login-form">
             <div class="sign-in-htm">
               <div class="group">
                 <label for="user" class="label">
-                  subject
+                  Subject
                 </label>
-                <input
-                  id="subject"
-                  type="text"
-                  class="input"
-                  name="subject"
+                <Select
                   value={this.state.subject}
-                  onChange={this.handleChange}
+                  onChange={this.handleSelect}
+                  options={this.state.subjects}
                 />
               </div>
               <div class="group">

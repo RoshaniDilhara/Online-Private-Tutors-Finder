@@ -85,12 +85,19 @@ class MyTutors extends Component {
             <tbody>
               {mytutors.map((newtutor) => {
                 if (newtutor._id != "") {
+                  let subjects = newtutor.subjects;
+                  let subjlen = subjects.length;
+                  var i;
+                  var text = "";
+                  for (i = 0; i < subjlen; i++) {
+                    text += subjects[i].label + ";";
+                  }
                   return (
                     <tr>
                       <td>{newtutor.fullname}</td>
 
                       <td>{newtutor.address}</td>
-                      <td>{newtutor.subjects}</td>
+                      <td>{text}</td>
                       <Link
                         to={`/appoinments/${newtutor._id}/${this.state.studentID}`}
                       >

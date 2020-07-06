@@ -89,7 +89,7 @@ class SentAppoinments extends Component {
                   </div>
                   <div>
                     <font color="lightseagreen">Subjects : </font>
-                    <font color="black">{newappoinment.subject}</font>
+                    <font color="black">{newappoinment.subject.label}</font>
                   </div>
                   <div>
                     <font color="lightseagreen">Venue : </font>

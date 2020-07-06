@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import _ from "lodash";
+import api from "../api/tutorapi";
+import sbjapi from "../api/subjectapi";
+import Select from "react-select";
 
 export default class MyNotes extends Component {
   constructor(props) {
@@ -8,6 +11,7 @@ export default class MyNotes extends Component {
 
     this.onFileChange = this.onFileChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
     //this.handleGet = this.handleGet.bind(this);
 
     this.state = {
@@ -15,6 +19,10 @@ export default class MyNotes extends Component {
       note: "",
       noteList: [],
       mynotesDup: [],
+      tutor: {},
+      subjects: [],
+      selectedOption: null,
+      subject_id: "",
     };
   }
 
@@ -26,6 +34,7 @@ export default class MyNotes extends Component {
     e.preventDefault();
     const formData = new FormData();
     formData.append("tutorID", this.state.tutorID);
+    formData.append("subjectID", this.state.subject_id);
     formData.append("note", this.state.note);
     axios
       .post(
@@ -39,8 +48,18 @@ export default class MyNotes extends Component {
       });
   }
 
-  componentDidMount() {
-    axios
+  componentDidMount = async () => {
+    await api.getTutorById(this.state.tutorID).then((tut) => {
+      this.setState({
+        tutor: tut.data.data,
+      });
+    });
+    const { tutor } = this.state;
+    this.setState({
+      subjects: tutor.subjects,
+    });
+
+    await axios
       .get("http://localhost:5000/api/tutornotes/tutor-get-notes")
       .then((res) => {
         this.setState({
@@ -48,10 +67,24 @@ export default class MyNotes extends Component {
         });
         console.log(res.data.users);
       });
-  }
+  };
+
+  handleSelect = (selectedOption) => {
+    this.setState({
+      selectedOption: selectedOption,
+      subject_id: selectedOption.value,
+    });
+    console.log(`Option selected:`, selectedOption);
+  };
 
   render() {
-    const { noteList, tutorID, mynotesDup } = this.state;
+    const {
+      noteList,
+      tutorID,
+      mynotesDup,
+      subjects,
+      selectedOption,
+    } = this.state;
 
     noteList.map((note) => {
       if (note.tutorID == tutorID) {
@@ -60,7 +93,7 @@ export default class MyNotes extends Component {
     });
 
     const mynotes = _.uniq(mynotesDup);
-
+    console.log(subjects);
     return (
       <div className="container">
         <div className="row">
@@ -69,11 +102,19 @@ export default class MyNotes extends Component {
               <input type="file" onChange={this.onFileChange} />
             </div>
             <div className="form-group">
+              <Select
+                value={selectedOption}
+                onChange={this.handleSelect}
+                options={subjects}
+              />
+            </div>
+            <div className="form-group">
               <button className="btn btn-primary" type="submit">
                 Upload
               </button>
             </div>
           </form>
+
           <div className="form-group">
             {mynotes.map((im) => {
               const nameU = im.note.split("/")[4];

@@ -22,6 +22,7 @@ class TutorProfile extends Component {
       description: "",
       tutorID: this.props.match.params.value,
       tutor: {},
+      dob: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmitA = this.handleSubmitA.bind(this);
@@ -43,6 +44,7 @@ class TutorProfile extends Component {
     const { tutor } = this.state;
     this.setState({
       subjects: tutor.subjects,
+      dob: tutor.dob,
     });
   };
 
@@ -224,8 +226,8 @@ class TutorProfile extends Component {
   }
 
   render() {
-    //Take the details of the logged user
-    //const { user } = this.props.auth;
+    const { dob } = this.state;
+    const dobn = dob.split("T")[0];
     return (
       <div>
         <label for="user" class="label">
@@ -387,7 +389,7 @@ class TutorProfile extends Component {
           id="user"
           className="form-control"
           name="dob"
-          value={this.state.tutor.dob}
+          value={dobn}
           readonly="true"
         />
         <Popup trigger={<button class="btn btn-primary">Change</button>} modal>

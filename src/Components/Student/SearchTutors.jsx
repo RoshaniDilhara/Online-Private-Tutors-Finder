@@ -89,7 +89,7 @@ class SearchTutors extends Component {
 
             <tbody>
               {this.state.tutors.map((newtutor) => {
-                if (newtutor._id != "") {
+                if (newtutor._id != "" && newtutor.accept == true) {
                   let subjects = newtutor.subjects;
                   let subjlen = subjects.length;
                   var i;

@@ -5,6 +5,9 @@ import { connect } from "react-redux";
 import { registerUser } from "./actions/tutorAuthActions";
 import classnames from "classnames";
 import { Link, withRouter } from "react-router-dom";
+import sbjapi from "../api/subjectapi";
+import Select from "react-select";
+import _ from "lodash";
 
 class TutorSignUp extends Component {
   constructor(props) {
@@ -19,14 +22,17 @@ class TutorSignUp extends Component {
       dob: "",
       contact_number: "",
       gender: "",
-      subjects: "",
       description: "",
       accept: false,
       errors: {},
+      subjectsListDup: [],
+      modSbjDup: [],
+      selectedOptions: null,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
@@ -35,6 +41,15 @@ class TutorSignUp extends Component {
       });
     }
   }
+
+  componentDidMount = async () => {
+    await sbjapi.getAllSubject().then((sbj) => {
+      this.setState({
+        subjectsListDup: sbj.data.data,
+      });
+    });
+    console.log(this.state.subjectsListDup);
+  };
 
   handleChange(e) {
     this.setState({
@@ -53,7 +68,7 @@ class TutorSignUp extends Component {
       dob: this.state.dob,
       contact_number: this.state.contact_number,
       gender: this.state.gender,
-      subjects: this.state.subjects,
+      subjects: this.state.selectedOptions,
       description: this.state.description,
       accept: this.state.accept,
     };
@@ -61,9 +76,32 @@ class TutorSignUp extends Component {
     this.props.registerUser(newTutor, this.props.history);
   }
 
+  handleSelect = (selectedOption) => {
+    this.setState({
+      selectedOptions: selectedOption,
+    });
+    console.log(`Option selected:`, selectedOption);
+  };
+
   render() {
-    const { errors } = this.state;
+    const { errors, subjectsListDup, modSbjDup, selectedOption } = this.state;
     //console.log(errors);
+
+    const subjectsList = _.uniq(subjectsListDup);
+
+    subjectsList.map((sbj) => {
+      const modsbj = {
+        value: sbj.subject_id,
+        label: sbj.subject_Name,
+      };
+      modSbjDup.push(modsbj);
+    });
+
+    const modSbj = _.dropRight(
+      modSbjDup,
+      modSbjDup.length - subjectsList.length
+    );
+
     return (
       <div class="signup-wrap">
         <div class="login-html">
@@ -193,7 +231,7 @@ class TutorSignUp extends Component {
                 <label for="user" class="label">
                   Subjects
                 </label>
-                <input
+                {/* <input
                   id="user"
                   type="text"
                   class="input"
@@ -201,7 +239,15 @@ class TutorSignUp extends Component {
                   error={errors.subjects}
                   name="subjects"
                   onChange={this.handleChange}
+                /> */}
+
+                <Select
+                  isMulti
+                  value={selectedOption}
+                  onChange={this.handleSelect}
+                  options={modSbj}
                 />
+
                 <span class="error-display">{errors.subjects}</span>
               </div>
 

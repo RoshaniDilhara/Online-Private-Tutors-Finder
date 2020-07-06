@@ -18,7 +18,7 @@ class TutorProfile extends Component {
       dob: "",
       contact_number: "",
       gender: "",
-      subjects: "",
+      subjects: [],
       description: "",
       tutorID: this.props.match.params.value,
       tutor: {},
@@ -31,7 +31,7 @@ class TutorProfile extends Component {
     this.handleSubmitE = this.handleSubmitE.bind(this);
     this.handleSubmitF = this.handleSubmitF.bind(this);
     this.handleSubmitG = this.handleSubmitG.bind(this);
-    this.handleSubmitH = this.handleSubmitH.bind(this);
+    //this.handleSubmitH = this.handleSubmitH.bind(this);
     this.handleSubmitI = this.handleSubmitI.bind(this);
   }
   componentDidMount = async () => {
@@ -39,6 +39,10 @@ class TutorProfile extends Component {
       this.setState({
         tutor: tut.data.data,
       });
+    });
+    const { tutor } = this.state;
+    this.setState({
+      subjects: tutor.subjects,
     });
   };
 
@@ -181,24 +185,24 @@ class TutorProfile extends Component {
     });
   }
 
-  handleSubmitH(e) {
-    const { tutor, subjects, tutorID } = this.state;
-    const payload = {
-      fullname: tutor.fullname,
-      email: tutor.email,
-      address: tutor.address,
-      nic: tutor.nic,
-      dob: tutor.dob,
-      contact_number: tutor.contact_number,
-      gender: tutor.gender,
-      subjects: subjects,
-      description: tutor.description,
-    };
+  // handleSubmitH(e) {
+  //   const { tutor, subjects, tutorID } = this.state;
+  //   const payload = {
+  //     fullname: tutor.fullname,
+  //     email: tutor.email,
+  //     address: tutor.address,
+  //     nic: tutor.nic,
+  //     dob: tutor.dob,
+  //     contact_number: tutor.contact_number,
+  //     gender: tutor.gender,
+  //     subjects: subjects,
+  //     description: tutor.description,
+  //   };
 
-    api.updateTutorById(tutorID, payload).then((res) => {
-      window.location.reload();
-    });
-  }
+  //   api.updateTutorById(tutorID, payload).then((res) => {
+  //     window.location.reload();
+  //   });
+  // }
 
   handleSubmitI(e) {
     const { tutor, description, tutorID } = this.state;
@@ -487,10 +491,11 @@ class TutorProfile extends Component {
         </Popup>
         <hr color="blue" />
 
-        <label for="user" class="label">
+        {/* <label for="user" class="label">
           Subjects
         </label>
         <br />
+
         <input
           id="user"
           className="form-control"
@@ -522,7 +527,7 @@ class TutorProfile extends Component {
             </div>
           )}
         </Popup>
-        <hr color="blue" />
+        <hr color="blue" /> */}
 
         <label for="user" class="label">
           Description

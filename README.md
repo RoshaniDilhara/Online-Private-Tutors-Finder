@@ -108,3 +108,5 @@ https://blog.bitsrc.io/build-a-login-auth-app-with-the-mern-stack-part-3-react-c
 ## Refered
 https://www.positronx.io/react-file-upload-tutorial-with-node-express-and-multer/
 
+### `npm i bcrypt` (need to be installed to the frontend)
+

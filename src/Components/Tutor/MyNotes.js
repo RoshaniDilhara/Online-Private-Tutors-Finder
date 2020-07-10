@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import _ from "lodash";
 import api from "../api/tutorapi";
-import sbjapi from "../api/subjectapi";
 import Select from "react-select";
 
 export default class MyNotes extends Component {

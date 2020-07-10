@@ -3,8 +3,7 @@ import "../Tutor/TutorSignIn.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "./actions/adminAuthActions";
-import classnames from "classnames";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class AdminLogin extends Component {
   constructor(props) {
@@ -23,13 +22,13 @@ class AdminLogin extends Component {
   componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/adminhome");
+      this.props.history.push(`/adminhome/${this.props.auth.user.id}`);
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/adminhome"); // push user to dashboard when they login
+      this.props.history.push(`/adminhome/${nextProps.auth.user.id}`); // push user to dashboard when they login
     }
     if (nextProps.errors) {
       this.setState({

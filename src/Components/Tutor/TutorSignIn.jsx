@@ -3,9 +3,7 @@ import "./TutorSignIn.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "./actions/tutorAuthActions";
-import classnames from "classnames";
-import TutorSignUp from "./TutorSignUp";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class TutorSignIn extends Component {
   constructor(props) {

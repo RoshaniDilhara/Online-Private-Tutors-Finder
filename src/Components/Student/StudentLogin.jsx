@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import { Link, withRouter, HashRouter as Router } from "react-router-dom";
-import { Nav } from "react-bootstrap";
+import { withRouter, HashRouter as Router } from "react-router-dom";
 import "../Tutor/TutorSignIn.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "./actions/studentAuthActions";
-import classnames from "classnames";
 
 class StudentLogin extends Component {
   constructor(props) {

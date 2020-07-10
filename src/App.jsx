@@ -30,7 +30,7 @@ function App() {
           <Route path="/about" component={About} />
           <Route path="/news" component={News} />
           <Route path="/adminlogin" component={AdminLogin} />
-          <Route path="/adminhome" component={AdminHome} />
+          <Route path="/adminhome/:value" component={AdminHome} />
           <Route path="/studentlogin" component={StudentLogin} />
           <Route path="/tutorlogin" component={TutorLogin} />
           <Route path="/tutorsignup" component={TutorSignUp} />

@@ -76,6 +76,19 @@ export default class MyNotes extends Component {
     console.log(`Option selected:`, selectedOption);
   };
 
+  handleDelete(id) {
+    console.log(id);
+
+    axios
+      .delete(`http://localhost:5000/api/tutornotes/note-delete/${id}`, {
+        params: { id },
+      })
+      .then((res) => {
+        console.log(res);
+        window.location.reload();
+      });
+  }
+
   render() {
     const {
       noteList,
@@ -94,38 +107,78 @@ export default class MyNotes extends Component {
     const mynotes = _.uniq(mynotesDup);
     console.log(subjects);
     return (
-      <div className="container">
-        <div className="row">
-          <form onSubmit={this.onSubmit}>
-            <div className="form-group">
-              <input type="file" onChange={this.onFileChange} />
-            </div>
-            <div className="form-group">
-              <Select
-                value={selectedOption}
-                onChange={this.handleSelect}
-                options={subjects}
-              />
-            </div>
-            <div className="form-group">
-              <button className="btn btn-primary" type="submit">
-                Upload
-              </button>
-            </div>
-          </form>
-
-          <div className="form-group">
-            {mynotes.map((im) => {
-              const nameU = im.note.split("/")[4];
-
-              const name = nameU.split("-")[nameU.split("-").length - 1];
+      <div>
+        <div>
+          <h4>
+            <strong>
+              <font color="blue">&nbsp;&nbsp;&nbsp;MY NOTES</font>
+            </strong>
+          </h4>
+        </div>
+        <div className="container">
+          <div className="row">
+            <form onSubmit={this.onSubmit}>
+              <div className="form-group">
+                <input type="file" onChange={this.onFileChange} />
+              </div>
+              <div className="form-group">
+                <Select
+                  value={selectedOption}
+                  onChange={this.handleSelect}
+                  options={subjects}
+                />
+              </div>
+              <div className="form-group">
+                <button className="btn btn-primary" type="submit">
+                  Upload
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className="form-group">
+          {subjects.map((sbj) => {
+            for (var i = 0; i < mynotes.length; i++) {
+              console.log(mynotes.length);
               return (
                 <div>
-                  <a href={im.note}>{name}</a>
+                  <table class="table table-stripe">
+                    <tr>
+                      <th>
+                        <font color="lightseagreen">{sbj.label}</font>
+                      </th>
+                    </tr>
+                    <tbody>
+                      {mynotes.map((im) => {
+                        const nameU = im.note.split("/")[4];
+
+                        const name = nameU.split("-")[
+                          nameU.split("-").length - 1
+                        ];
+
+                        if (sbj.value == im.subjectID) {
+                          console.log(name);
+                          return (
+                            <tr>
+                              <td>
+                                <a href={im.note}>{name}</a>
+                              </td>
+                              <button
+                                class="btn btn-danger"
+                                onClick={this.handleDelete.bind(this, im._id)}
+                              >
+                                DELETE
+                              </button>
+                            </tr>
+                          );
+                        }
+                      })}
+                    </tbody>
+                  </table>
                 </div>
               );
-            })}
-          </div>
+            }
+          })}
         </div>
       </div>
     );

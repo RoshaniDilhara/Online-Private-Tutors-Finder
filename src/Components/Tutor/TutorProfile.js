@@ -4,7 +4,10 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import api from "../api/tutorapi";
 import Popup from "reactjs-popup";
+import NewPasswordModal from "./NewPasswordModal";
+const bcrypt = require("bcryptjs");
 
+var mtc = false;
 class TutorProfile extends Component {
   constructor(props) {
     super(props);
@@ -22,6 +25,8 @@ class TutorProfile extends Component {
       tutorID: this.props.match.params.value,
       tutor: {},
       dob: "",
+      password: ``,
+      show: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmitA = this.handleSubmitA.bind(this);
@@ -31,8 +36,8 @@ class TutorProfile extends Component {
     this.handleSubmitE = this.handleSubmitE.bind(this);
     this.handleSubmitF = this.handleSubmitF.bind(this);
     this.handleSubmitG = this.handleSubmitG.bind(this);
-    //this.handleSubmitH = this.handleSubmitH.bind(this);
     this.handleSubmitI = this.handleSubmitI.bind(this);
+    this.confirmPassword = this.confirmPassword.bind(this); // confirm old password
   }
   componentDidMount = async () => {
     await api.getTutorById(this.state.tutorID).then((tut) => {
@@ -65,6 +70,7 @@ class TutorProfile extends Component {
       gender: tutor.gender,
       subjects: tutor.subjects,
       description: tutor.description,
+      password: tutor.password,
     };
 
     api.updateTutorById(tutorID, payload).then((res) => {
@@ -84,6 +90,7 @@ class TutorProfile extends Component {
       gender: tutor.gender,
       subjects: tutor.subjects,
       description: tutor.description,
+      password: tutor.password,
     };
 
     api.updateTutorById(tutorID, payload).then((res) => {
@@ -103,6 +110,7 @@ class TutorProfile extends Component {
       gender: tutor.gender,
       subjects: tutor.subjects,
       description: tutor.description,
+      password: tutor.password,
     };
 
     api.updateTutorById(tutorID, payload).then((res) => {
@@ -122,6 +130,7 @@ class TutorProfile extends Component {
       gender: tutor.gender,
       subjects: tutor.subjects,
       description: tutor.description,
+      password: tutor.password,
     };
 
     api.updateTutorById(tutorID, payload).then((res) => {
@@ -141,6 +150,7 @@ class TutorProfile extends Component {
       gender: tutor.gender,
       subjects: tutor.subjects,
       description: tutor.description,
+      password: tutor.password,
     };
 
     api.updateTutorById(tutorID, payload).then((res) => {
@@ -160,6 +170,7 @@ class TutorProfile extends Component {
       gender: tutor.gender,
       subjects: tutor.subjects,
       description: tutor.description,
+      password: tutor.password,
     };
 
     api.updateTutorById(tutorID, payload).then((res) => {
@@ -169,6 +180,7 @@ class TutorProfile extends Component {
 
   handleSubmitG(e) {
     const { tutor, gender, tutorID } = this.state;
+
     const payload = {
       fullname: tutor.fullname,
       email: tutor.email,
@@ -179,31 +191,13 @@ class TutorProfile extends Component {
       gender: gender,
       subjects: tutor.subjects,
       description: tutor.description,
+      password: tutor.password,
     };
 
     api.updateTutorById(tutorID, payload).then((res) => {
       window.location.reload();
     });
   }
-
-  // handleSubmitH(e) {
-  //   const { tutor, subjects, tutorID } = this.state;
-  //   const payload = {
-  //     fullname: tutor.fullname,
-  //     email: tutor.email,
-  //     address: tutor.address,
-  //     nic: tutor.nic,
-  //     dob: tutor.dob,
-  //     contact_number: tutor.contact_number,
-  //     gender: tutor.gender,
-  //     subjects: subjects,
-  //     description: tutor.description,
-  //   };
-
-  //   api.updateTutorById(tutorID, payload).then((res) => {
-  //     window.location.reload();
-  //   });
-  // }
 
   handleSubmitI(e) {
     const { tutor, description, tutorID } = this.state;
@@ -217,12 +211,30 @@ class TutorProfile extends Component {
       gender: tutor.gender,
       subjects: tutor.subjects,
       description: description,
+      password: tutor.password,
     };
 
     api.updateTutorById(tutorID, payload).then((res) => {
       window.location.reload();
     });
   }
+
+  // confirm old password
+  confirmPassword = async (e) => {
+    const { tutor, tutorID } = this.state;
+    //console.log("Helllo");
+    await bcrypt
+      .compare(this.state.password, tutor.password)
+      .then((isMatch) => {
+        console.log(isMatch);
+        if (isMatch) {
+          this.setState({
+            show: true,
+          });
+        } else {
+        }
+      });
+  };
 
   render() {
     const { dob } = this.state;
@@ -492,44 +504,6 @@ class TutorProfile extends Component {
         </Popup>
         <hr color="blue" />
 
-        {/* <label for="user" class="label">
-          Subjects
-        </label>
-        <br />
-
-        <input
-          id="user"
-          className="form-control"
-          name="subjects"
-          value={this.state.tutor.subjects}
-          readonly="true"
-        />
-        <Popup trigger={<button class="btn btn-primary">Change</button>} modal>
-          {(close) => (
-            <div>
-              <div className="form-group">
-                <label htmlFor="name">Subjects</label>
-                <input
-                  className="form-control"
-                  name="subjects"
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="form-group">
-                <button
-                  className="btn btn-primary"
-                  type="submit"
-                  onClick={this.handleSubmitH}
-                >
-                  Save Changes
-                </button>
-              </div>
-            </div>
-          )}
-        </Popup>
-        <hr color="blue" /> */}
-
         <label for="user" class="label">
           Description
         </label>
@@ -566,6 +540,43 @@ class TutorProfile extends Component {
           )}
         </Popup>
         <hr color="blue" />
+
+        {/****************change password**********************/}
+        <Popup
+          trigger={<button class="btn btn-primary">Change Password</button>}
+          modal
+        >
+          {(close) => (
+            <div>
+              <div className="form-group">
+                <label htmlFor="name">Old Password</label>
+                <input
+                  className="form-control"
+                  name="password"
+                  onChange={this.handleChange}
+                />
+              </div>
+
+              <div className="form-group">
+                <button
+                  className="btn btn-primary"
+                  type="submit"
+                  onClick={this.confirmPassword}
+                >
+                  Confirm
+                </button>
+                <br />
+                <NewPasswordModal
+                  show={this.state.show}
+                  tutor={this.state.tutor}
+                ></NewPasswordModal>
+              </div>
+            </div>
+          )}
+        </Popup>
+
+        <hr color="blue" />
+        {/**************************************************************/}
       </div>
     );
   }

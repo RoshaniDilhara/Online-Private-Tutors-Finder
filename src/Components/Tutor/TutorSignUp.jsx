@@ -83,7 +83,7 @@ class TutorSignUp extends Component {
   };
 
   render() {
-    const { errors, subjectsListDup, modSbjDup, selectedOption } = this.state;
+    const { errors, subjectsListDup, modSbjDup, selectedOptions } = this.state;
     //console.log(errors);
 
     const subjectsList = _.uniq(subjectsListDup);
@@ -242,7 +242,7 @@ class TutorSignUp extends Component {
 
                 <Select
                   isMulti
-                  value={selectedOption}
+                  value={selectedOptions}
                   onChange={this.handleSelect}
                   options={modSbj}
                 />

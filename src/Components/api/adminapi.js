@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiadmin = axios.create({
-  baseURL: "http://localhost:5000/api/admins",
+  baseURL: "http://localhost:5000/api/adminfunction",
 });
 
 export const insertAdmin = (payload) => apiadmin.post(`/admin`, payload);

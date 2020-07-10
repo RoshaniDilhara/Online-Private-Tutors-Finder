@@ -6,7 +6,8 @@ const apiadmin = axios.create({
 
 export const insertAdmin = (payload) => apiadmin.post(`/admin`, payload);
 export const getAllAdmin = () => apiadmin.get(`/admins`);
-export const updateAdminById = (id, payload) => apiadmin.put(`/admin/${id}`, payload);
+export const updateAdminById = (id, payload) =>
+  apiadmin.put(`/admin/${id}`, payload);
 export const deleteAdminById = (id) => apiadmin.delete(`/admin/${id}`);
 export const getAdminById = (id) => apiadmin.get(`/admin/${id}`);
 

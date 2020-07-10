@@ -4,13 +4,12 @@ import { logoutUser } from "./actions/adminAuthActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import "../Student/StudentSection.css";
-import { Link,Route,HashRouter, withRouter } from "react-router-dom";
+import { Link, Route, HashRouter, withRouter } from "react-router-dom";
 import apiadmin from "../api/adminapi";
 import AdminProfile from "./AdminProfile";
 import Avatar from "react-avatar";
 
 class AdminHome extends Component {
-
   constructor(props) {
     super(props);
     //const { user } = this.props.auth;
@@ -18,6 +17,7 @@ class AdminHome extends Component {
       adminID: this.props.match.params.value,
       admin: {},
     };
+    //console.log(this.state.adminID);
   }
 
   onLogoutClick = (e) => {
@@ -27,11 +27,13 @@ class AdminHome extends Component {
   };
 
   componentDidMount = async () => {
+    console.log(this.state.adminID);
     await apiadmin.getAdminById(this.state.adminID).then((adm) => {
       this.setState({
         admin: adm.data.data,
       });
     });
+    console.log(this.state.admin);
   };
 
   // render() {
@@ -132,13 +134,12 @@ class AdminHome extends Component {
   //   );
   // }
 
-
   render() {
     console.log(this.state.admin);
     return (
       <div>
         <div>
-        <HashRouter basename="/">
+          <HashRouter basename="/">
             <div className="gap">
               <Row>
                 <Col xs={1} sm={0}>
@@ -164,7 +165,6 @@ class AdminHome extends Component {
               >
                 Log out
               </Button>
-              
             </div>
 
             <div className="whole">
@@ -179,21 +179,19 @@ class AdminHome extends Component {
                 </div>
               </div>
 
-              <div className="barside">                
+              <div className="barside">
                 <Route
                   exact
                   path="/adminprofile/:value"
                   component={AdminProfile}
-                />                
+                />
               </div>
-              
             </div>
           </HashRouter>
         </div>
       </div>
     );
   }
-
 }
 
 AdminHome.propTypes = {

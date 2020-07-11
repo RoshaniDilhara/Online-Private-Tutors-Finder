@@ -3,6 +3,7 @@ import apistudents from "../api/studentapi";
 import apisappoinment from "../api/appoinmentapi";
 import apitutors from "../api/tutorapi";
 import _ from "lodash";
+import classes from './ViewStudents.module.css';
 
 class ViewAppoinments extends Component{
 
@@ -86,7 +87,7 @@ class ViewAppoinments extends Component{
                 </h4>
                 </div>
 
-                <div>
+                <div className={classes.ScrollBar}>
                 <table class="table table-stripe">
                     <tr>
                     <th>

@@ -51,7 +51,7 @@ class ViewStudents extends Component{
         }
 
           return (
-            <div className={classes.ViewStudents}>
+            <div>
                 <div>
                 <h4>
                     <strong>
@@ -60,7 +60,7 @@ class ViewStudents extends Component{
                 </h4>
                 </div>
 
-                <div>
+                <div className={classes.ScrollBar}>
                 <table class="table table-stripe">
                     <tr>
                     <th>

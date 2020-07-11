@@ -8,6 +8,7 @@ import { Link, Route, HashRouter, withRouter } from "react-router-dom";
 import apiadmin from "../api/adminapi";
 import AdminProfile from "./AdminProfile";
 import Avatar from "react-avatar";
+import ViewAppoinments from './ViewAppoinments'
 
 class AdminHome extends Component {
   constructor(props) {
@@ -177,6 +178,14 @@ class AdminHome extends Component {
                     <font color="blue">MY PROFILE</font>
                   </Link>
                 </div>
+                <div className="gap">
+                  <Link
+                    to={`/viewappoinments/${this.state.adminID}`}
+                    className="waves-effect waves-light btn-small"
+                  >
+                    <font color="blue">VIEW APPOINMENTS</font>
+                  </Link>
+                </div>
               </div>
 
               <div className="barside">
@@ -184,6 +193,11 @@ class AdminHome extends Component {
                   exact
                   path="/adminprofile/:value"
                   component={AdminProfile}
+                />
+                <Route
+                  exact
+                  path="/viewappoinments/:value"
+                  component={ViewAppoinments}
                 />
               </div>
             </div>

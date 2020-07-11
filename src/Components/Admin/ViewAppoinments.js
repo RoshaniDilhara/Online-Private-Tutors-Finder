@@ -62,7 +62,9 @@ class ViewAppoinments extends Component{
                   date:appoinment.date,
                   startTime: appoinment.startTime,
                   endTime: appoinment.endTime,
-                  venue: appoinment.venue,                  
+                  venue: appoinment.venue,  
+                  subject_val: appoinment.subject.value, 
+                  subject_label: appoinment.subject.label,               
                 };
                 myAppoinStudentsDup.push(appoin);
               }
@@ -115,6 +117,9 @@ class ViewAppoinments extends Component{
                     <th>
                         <font color="lightseagreen">Venue</font>
                     </th>
+                    <th>
+                        <font color="lightseagreen">Subject</font>
+                    </th>
                     </tr>
 
                     <tbody>
@@ -137,6 +142,7 @@ class ViewAppoinments extends Component{
                             <td>{myreq.startTime}</td>
                             <td>{myreq.endTime}</td>
                             <td>{myreq.venue}</td>
+                            <td>{myreq.subject_val}: {myreq.subject_label}</td>
                             </tr>
                         );
                         }

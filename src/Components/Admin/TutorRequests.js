@@ -26,8 +26,7 @@ class TutorRequests extends Component {
   
   handleAccept = async (reqIndex, myreq) => {
     const { accept, tutorID,tutors } = this.state;
-    const payload = { accept };
-    //console.log(tutorID[reqIndex]._id);
+    const payload = { accept,tutorID };
 
     const val = window.confirm(
       `You have accepted the tutor ${myreq.fullname}`

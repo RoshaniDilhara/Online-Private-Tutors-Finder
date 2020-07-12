@@ -6,7 +6,6 @@ import {
   FormControl,
   Button,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 export default class CustomNavBar extends Component {
   render() {

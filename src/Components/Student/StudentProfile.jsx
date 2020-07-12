@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { logoutUser } from "./actions/studentAuthActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import apistudent from "../api/studentapi";
 import Popup from "reactjs-popup";
 

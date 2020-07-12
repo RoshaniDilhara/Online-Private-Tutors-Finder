@@ -3,8 +3,7 @@ import "../Tutor/TutorSignUp.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "./actions/studentAuthActions";
-import classnames from "classnames";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class StudentSignUp extends Component {
   constructor(props) {

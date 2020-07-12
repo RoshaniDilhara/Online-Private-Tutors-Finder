@@ -52,7 +52,7 @@ class ViewAppoinments extends Component{
           this.state.tutors.map((myr) => {
             this.state.students.map((std) => {
             this.state.appoinments.map((appoinment) => {
-              if (appoinment.tutorID == myr._id && appoinment.studentID == std._id) {
+              if (appoinment.tutorID === myr._id && appoinment.studentID === std._id) {
                 const appoin = {
                   id: appoinment._id,
                   firstname: std.firstname,
@@ -124,8 +124,8 @@ class ViewAppoinments extends Component{
 
                     <tbody>
                     {myAppoinStudents.map((myreq) => {
-                        if (myreq._id != "") {
-                        const index = myAppoinStudents.indexOf(myreq);
+                        if (myreq._id !== "") {
+                        // const index = myAppoinStudents.indexOf(myreq);
                         const date = myreq.date.split("T")[0];
                         const accept = myreq.accept.toString();
                         return (

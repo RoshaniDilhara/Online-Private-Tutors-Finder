@@ -53,7 +53,7 @@ class MyStudents extends Component {
     //console.log(tutorID);
     //console.log(requests);
     requests.map((req) => {
-      if (req.tutorID == tutorID && req.accept == true) {
+      if (req.tutorID === tutorID && req.accept === true) {
         myRequestsID.push(req);
       }
     });
@@ -61,7 +61,7 @@ class MyStudents extends Component {
 
     myRequestsID.map((myr) => {
       students.map((student) => {
-        if (student._id == myr.studentID) {
+        if (student._id === myr.studentID) {
           myStudents.push(student);
         }
       });
@@ -96,7 +96,7 @@ class MyStudents extends Component {
 
             <tbody>
               {myRequests.map((myreq) => {
-                if (myreq._id != "") {
+                if (myreq._id !== "") {
                   const index = myRequests.indexOf(myreq);
                   return (
                     <tr>

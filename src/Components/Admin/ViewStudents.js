@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import apistudents from "../api/studentapi";
 import _ from "lodash";
 import classes from './ViewStudents.module.css'
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 class ViewStudents extends Component{
 
@@ -10,6 +12,7 @@ class ViewStudents extends Component{
         this.state = {
           students: [],
           studentsDup: [],
+          adminID: this.props.match.params.value,
         };
       }
 
@@ -22,9 +25,22 @@ class ViewStudents extends Component{
 
       }
 
+      removeStudent(reqIndex, myreq) {
+        const { students } = this.state;
+        if (
+          window.confirm(
+            `Do you want to  permanently remove the student: ${myreq.firstname} ${myreq.lastname}?`
+          )
+        ) {
+          apistudents.deleteStudentById(students[reqIndex]._id);
+          window.location.reload();
+        }
+      }
+
       render(){
           const {
               studentsDup,
+              adminID,
             } = this.state;
         //   console.log('StudentList ->', students)
 
@@ -106,6 +122,21 @@ class ViewStudents extends Component{
                             <td>{dob}</td>
                             <td>{myreq.contact_number}</td>                            
                             <td>{date}</td>
+                            <td>
+                            <Link
+                                to={`/viewstudentprofile/${this.state.adminID}/${myreq.id}`}
+                            >
+                                <button class="btn btn-info">VIEW</button>
+                            </Link>
+                            </td>
+                            <td>
+                            <button
+                                class="btn btn-danger"
+                                onClick={this.removeStudent.bind(this, index, myreq)}
+                            >
+                                REMOVE
+                            </button>
+                            </td>
                             </tr>
                         );
                         }
@@ -118,5 +149,6 @@ class ViewStudents extends Component{
       }
 
 }
+
 
 export default ViewStudents;

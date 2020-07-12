@@ -10,6 +10,7 @@ import AdminProfile from "./AdminProfile";
 import Avatar from "react-avatar";
 import ViewAppoinments from './ViewAppoinments'
 import ViewStudents from './ViewStudents'
+import ViewStudent from '../Tutor/ViewStudent'
 
 class AdminHome extends Component {
   constructor(props) {
@@ -214,6 +215,11 @@ class AdminHome extends Component {
                   exact
                   path="/viewstudents/:value"
                   component={ViewStudents}
+                />
+                <Route
+                  exact
+                  path="/viewstudentprofile/:value/:studentID"
+                  component={ViewStudent}
                 />
               </div>
             </div>

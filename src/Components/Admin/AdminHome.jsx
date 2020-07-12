@@ -11,6 +11,8 @@ import Avatar from "react-avatar";
 import ViewAppoinments from './ViewAppoinments'
 import ViewStudents from './ViewStudents'
 import ViewStudent from '../Tutor/ViewStudent'
+import TutorRequests from './TutorRequests'
+import AcceptedTutors from './AcceptedTutors'
 
 class AdminHome extends Component {
   constructor(props) {
@@ -138,7 +140,7 @@ class AdminHome extends Component {
   // }
 
   render() {
-    console.log(this.state.admin);
+    // console.log(this.state.admin);
     return (
       <div>
         <div>
@@ -198,6 +200,24 @@ class AdminHome extends Component {
                   </Link>
                 </div>
 
+                <div className="gap">
+                  <Link
+                    to={`/tutorrequests/${this.state.adminID}`}
+                    className="waves-effect waves-light btn-small"
+                  >
+                    <font color="blue">TUTOR REQUESTS</font>
+                  </Link>
+                </div>
+
+                <div className="gap">
+                  <Link
+                    to={`/acceptedtutors/${this.state.adminID}`}
+                    className="waves-effect waves-light btn-small"
+                  >
+                    <font color="blue">ACCEPTED TUTORS</font>
+                  </Link>
+                </div>
+
               </div>
 
               <div className="barside">
@@ -221,6 +241,17 @@ class AdminHome extends Component {
                   path="/viewstudentprofile/:value/:studentID"
                   component={ViewStudent}
                 />
+                <Route
+                  exact
+                  path="/tutorrequests/:value"
+                  component={TutorRequests}
+                />                
+                <Route
+                exact
+                path="/acceptedtutors/:value"
+                component={AcceptedTutors}
+              />
+                
               </div>
             </div>
           </HashRouter>

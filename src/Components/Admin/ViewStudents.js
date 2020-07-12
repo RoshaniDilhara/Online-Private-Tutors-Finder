@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import apistudents from "../api/studentapi";
 import _ from "lodash";
 import classes from './ViewStudents.module.css'
-import { Link, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class ViewStudents extends Component{
 

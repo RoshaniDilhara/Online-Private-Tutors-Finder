@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import apitutors from "../api/tutorapi";
 import _ from "lodash";
+import classes from './ViewStudents.module.css'
 
 class AcceptedTutors extends Component {
   constructor(props) {
@@ -91,7 +92,7 @@ class AcceptedTutors extends Component {
             </strong>
           </h4>
         </div>
-        <div>
+        <div className={classes.ScrollBar}>
           <table class="table table-stripe">
             <tr>
               <th>

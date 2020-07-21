@@ -1,0 +1,17 @@
+.gap {
+  padding-top: 25px;
+  padding-left: 25px;
+}
+
+.linkside {
+  width: 20%;
+}
+
+.barside {
+  width: 80%;
+}
+
+.whole {
+  height: auto;
+  display: flex;
+}

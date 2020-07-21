@@ -1,0 +1,28 @@
+p {
+  font-size: x-large;
+}
+
+h3 {
+  margin-top: 5rem;
+  margin-bottom: 20rem;
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+.person-wrapper {
+  margin-bottom: 0em;
+  margin-top: 3em;
+}
+
+.button {
+  background-color: #2892d7;
+  margin-bottom: 2em;
+}
+
+.buttonSearch {
+  background-color: #0f0be64d;
+}
+
+.profile-pic {
+  width: 50%;
+}

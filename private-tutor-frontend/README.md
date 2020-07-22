@@ -121,24 +121,37 @@ install below things to the front end
 ### `npm i identity-obj-proxy`
 
 To run the tests
-open another CLI and npm run test
+open another CLI and `npm run test`
 A line was commented in the store.js file as it was giving an error when running test cases
 
 .bablerc -> added preset -> used to convert .jsx syntax to plain js (because jest needs them in plain js)
 jest.config.json -> configuration file for jest -> testRegex to identify the test files (.spec) -> moduleNameMapper to mock the .css files
 
+## Refered
 https://stackoverflow.com/questions/46177148/how-to-exclude-css-module-files-from-jest-test-suites
+
 https://stackoverflow.com/questions/55266641/shallowwrappersetstate-can-only-be-called-on-class-components
+
 https://stackoverflow.com/questions/50025717/jest-enzyme-invariant-violation-you-should-not-use-route-or-withrouter-ou
+
 https://medium.com/@koszkota/testing-react-applications-using-enzyme-and-jest-manual-mocks-ab7a8ba2c94c
+
 https://stackoverflow.com/questions/53514758/redux-typeerror-cannot-read-property-apply-of-undefined
+
 https://www.robinwieruch.de/react-connected-component-test
+
 https://stackoverflow.com/questions/50222545/enzyme-expects-an-adapter-to-be-configured
+
 https://www.smashingmagazine.com/2020/06/practical-guide-testing-react-applications-jest/
+
 https://stackoverflow.com/questions/46572025/typeerror-enzyme2-default-configure-is-not-a-function
+
 https://stackoverflow.com/questions/33958757/jest-not-preprocessing-my-jsx
+
 https://babeljs.io/docs/en/config-files
+
 https://medium.com/@krishankantsinghal/testing-login-react-component-using-jest-and-enzyme-888daaab72ba
+
 https://www.robinwieruch.de/react-testing-jest
 
 

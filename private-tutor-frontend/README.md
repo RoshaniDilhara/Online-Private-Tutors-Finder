@@ -121,10 +121,13 @@ install below things to the front end
 ### `npm i identity-obj-proxy`
 
 To run the tests
+
 open another CLI and `npm run test`
+
 A line was commented in the store.js file as it was giving an error when running test cases
 
 .bablerc -> added preset -> used to convert .jsx syntax to plain js (because jest needs them in plain js)
+
 jest.config.json -> configuration file for jest -> testRegex to identify the test files (.spec) -> moduleNameMapper to mock the .css files
 
 ## Refered

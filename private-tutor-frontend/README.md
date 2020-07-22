@@ -130,6 +130,16 @@ A line was commented in the store.js file as it was giving an error when running
 
 jest.config.json -> configuration file for jest -> testRegex to identify the test files (.spec) -> moduleNameMapper to mock the .css files
 
+`To package.json file add below changes`
+
+"scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "jest --config ./jest.config.json",
+    "test:watch": "npm run test -- --watch",
+    "eject": "react-scripts eject"
+  },
+
 ## Refered
 https://stackoverflow.com/questions/46177148/how-to-exclude-css-module-files-from-jest-test-suites
 

@@ -6,7 +6,7 @@ import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 export const registerUser = (userData, history) => (dispatch) => {
   axios
     .post("/api/tutorauth/register", userData)
-    .then((res) => history.push("/tutorlogin")) // re-direct to login on successful register
+    .then((res) => history.push("/tutorsignin")) // re-direct to login on successful register
     .catch((err) =>
       dispatch({
         type: GET_ERRORS,
@@ -60,5 +60,5 @@ export const logoutUser = () => (dispatch) => {
   dispatch(setCurrentUser({}));
   //store.dispatch(logoutUser());
   // Redirect to login
-  window.location.href = "/tutorlogin";
+  window.location.href = "/tutorsignin";
 };

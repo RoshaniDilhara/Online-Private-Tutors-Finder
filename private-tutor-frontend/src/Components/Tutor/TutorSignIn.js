@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { loginUser } from "./actions/tutorAuthActions";
 import { withRouter } from "react-router-dom";
 
-class TutorSignIn extends Component {
+export class TutorSignIn extends Component {
   constructor(props) {
     super(props);
 

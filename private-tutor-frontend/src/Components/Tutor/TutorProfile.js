@@ -583,12 +583,12 @@ class TutorProfile extends Component {
 }
 
 //These should be added to access the logged user
-TutorProfile.propTypes = {
-  auth: PropTypes.object.isRequired,
-};
+// TutorProfile.propTypes = {
+//   auth: PropTypes.object.isRequired,
+// };
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
+// const mapStateToProps = (state) => ({
+//   auth: state.auth,
+// });
 
-export default connect(mapStateToProps)(withRouter(TutorProfile));
+export default TutorProfile;

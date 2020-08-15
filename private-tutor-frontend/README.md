@@ -122,22 +122,13 @@ install below things to the front end
 
 To run the tests
 
-open another CLI and go to frontend folder and then`npm run test`
+open another CLI and`npm run test`
 
 A line was commented in the store.js file as it was giving an error when running test cases
 
 .bablerc -> added preset -> used to convert .jsx syntax to plain js (because jest needs them in plain js)
 
 jest.config.json -> configuration file for jest -> testRegex to identify the test files (.spec) -> moduleNameMapper to mock the .css files
-
-## In package.json
-"scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "jest --config ./jest.config.json",
-    "test:watch": "npm run test -- --watch",
-    "eject": "react-scripts eject"
-  },
 
 ## Refered
 https://stackoverflow.com/questions/46177148/how-to-exclude-css-module-files-from-jest-test-suites

@@ -130,12 +130,8 @@ A line was commented in the store.js file as it was giving an error when running
 
 jest.config.json -> configuration file for jest -> testRegex to identify the test files (.spec) -> moduleNameMapper to mock the .css files
 
-<<<<<<< HEAD
-## In package.json
-=======
-`To package.json file add below changes`
 
->>>>>>> 0c7b98006ae8417f281318e9e383886d06f9c9ed
+## In package.json
 "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

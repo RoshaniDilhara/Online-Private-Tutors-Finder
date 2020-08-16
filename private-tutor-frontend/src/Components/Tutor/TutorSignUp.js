@@ -106,7 +106,7 @@ class TutorSignUp extends Component {
         <div class="login-html">
           <input id="tab-1" type="radio" name="tab" class="sign-in" />
           <label for="tab-1" class="tab">
-            <a href="/tutorlogin">Sign In</a>
+            <a href="/tutorsignin">Sign In</a>
           </label>
           <input id="tab-2" type="radio" name="tab" class="sign-up" checked />
           <label for="tab-2" class="tab">

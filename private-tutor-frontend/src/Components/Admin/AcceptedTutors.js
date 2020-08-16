@@ -4,15 +4,16 @@ import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import apitutors from "../api/tutorapi";
 import _ from "lodash";
-import classes from './ViewStudents.module.css'
+import classes from "./ViewStudents.module.css";
 
 class AcceptedTutors extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tutors: [], 
-      tutorID:[],
-      tutorsDup:[],
+      tutors: [],
+      tutorID: [],
+      tutorsDup: [],
+      tutorN: [],
     };
   }
 
@@ -22,66 +23,61 @@ class AcceptedTutors extends Component {
         tutors: tut.data.data,
       });
     });
-  };  
+  };
 
-  removeTutor(reqIndex, myreq) {
-    const { tutorID,tutors } = this.state;
-    if (
-      window.confirm(
-        `Do you want to remove the tutor ${myreq.fullname}`
-      )
-    ) {
-      apitutors.deleteTutorById(tutors[reqIndex]._id);
+  removeTutor = async (reqIndex, myreq) => {
+    const { tutorID, tutors } = this.state;
+    if (window.confirm(`Do you want to remove the tutor ${myreq.fullname}`)) {
+      await apitutors.deleteTutorById(myreq.id);
       window.location.reload();
     }
-  }
+  };
 
   render() {
-    const {
-      tutors,
-      tutorID,
-      tutorsDup,
-    } = this.state;
+    const { tutors, tutorID, tutorsDup, tutorN } = this.state;
 
     // console.log(tutorID);
     // console.log(tutors);
 
-    tutors.map((req) => {
-      if (req.tutorID === tutorID && req.accept === false) {
-        tutorID.push(req);
+    const gg = _.uniq(tutors);
+    console.log(gg);
+
+    gg.map((req) => {
+      if (req.accept == true) {
+        tutorN.push(req);
       }
     });
-    // console.log(tutorID);
+    const tutorsU = _.uniq(tutorN);
 
     // const tutorID = _.uniq(tutorID);
 
-    tutors.map((tutor) => {
-        const details = {
-          id: tutor._id,
-          fullname: tutor.fullname,
-          email: tutor.email,
-          address:tutor.address,
-          nic:tutor.nic,
-          dob:tutor.dob,
-          contact_number: tutor.contact_number,
-          gender:tutor.gender,
-          sub_val:tutor.subjects[0].value,
-          sub_label:tutor.subjects[0].label,
-          description:tutor.description,
-          date: tutor.date,
-          accept:tutor.accept,                 
-        };
-        
-        // console.log(details);
-        tutorsDup.push(details);
+    tutorsU.map((tutor) => {
+      const details = {
+        id: tutor._id,
+        fullname: tutor.fullname,
+        email: tutor.email,
+        address: tutor.address,
+        nic: tutor.nic,
+        dob: tutor.dob,
+        contact_number: tutor.contact_number,
+        gender: tutor.gender,
+        sub_val: tutor.subjects[0].value,
+        sub_label: tutor.subjects[0].label,
+        description: tutor.description,
+        date: tutor.date,
+        accept: tutor.accept,
+      };
+
+      // console.log(details);
+      tutorsDup.push(details);
     });
 
-  const AllTutors = _.uniq(tutorsDup);
+    const AllTutors = _.dropRight(tutorsDup, tutorsDup.length - tutorsU.length);
 
-  let showTable = true
-  if (!this.state.tutors.length) {
-      showTable = false
-  }
+    let showTable = true;
+    if (!AllTutors.length) {
+      showTable = false;
+    }
 
     return (
       <div>
@@ -131,7 +127,7 @@ class AcceptedTutors extends Component {
 
             <tbody>
               {AllTutors.map((myreq) => {
-                if (myreq._id != "" && myreq.accept === true) {
+                if (myreq._id != "") {
                   const index = AllTutors.indexOf(myreq);
                   const date = myreq.date.split("T")[0];
                   const dob = myreq.dob.split("T")[0];
@@ -144,16 +140,18 @@ class AcceptedTutors extends Component {
                       <td>{dob}</td>
                       <td>{myreq.contact_number}</td>
                       <td>{myreq.gender}</td>
-                      <td>{myreq.sub_val} {myreq.sub_label}</td>
+                      <td>
+                        {myreq.sub_val} {myreq.sub_label}
+                      </td>
                       <td>{myreq.description}</td>
                       <td>{date}</td>
                       <td>
-                      <button
-                        class="btn btn-warning"
-                        onClick={this.removeTutor.bind(this, index, myreq)}
-                      >
-                        Remove
-                      </button>
+                        <button
+                          class="btn btn-warning"
+                          onClick={this.removeTutor.bind(this, index, myreq)}
+                        >
+                          Remove
+                        </button>
                       </td>
                     </tr>
                   );

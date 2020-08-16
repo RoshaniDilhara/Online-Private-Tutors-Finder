@@ -4,15 +4,17 @@ import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import apitutors from "../api/tutorapi";
 import _ from "lodash";
-import classes from './ViewStudents.module.css'
+import classes from "./ViewStudents.module.css";
 
 class TutorRequests extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tutors: [], 
-      tutorID:[],
-      tutorsDup:[],
+      tutors: [],
+      tutorID: [],
+      tutorsDup: [],
+      accept: true,
+      tutorsN: [],
     };
   }
 
@@ -24,82 +26,88 @@ class TutorRequests extends Component {
     });
   };
 
-  
   handleAccept = async (reqIndex, myreq) => {
-    const { accept, tutorID,tutors } = this.state;
-    const payload = { accept,tutorID };
-
-    const val = window.confirm(
-      `You have accepted the tutor ${myreq.fullname}`
-    );
+    const { accept, tutorID, tutors } = this.state;
+    const payload = {
+      fullname: myreq.fullname,
+      email: myreq.email,
+      address: myreq.address,
+      nic: myreq.nic,
+      dob: myreq.dob,
+      contact_number: myreq.contact_number,
+      gender: myreq.gender,
+      subjects: myreq.subjects,
+      description: myreq.description,
+      password: myreq.password,
+      accept: accept,
+    };
+    console.log(myreq.id);
+    const val = window.confirm(`You have accepted the tutor ${myreq.fullname}`);
 
     if (val == true) {
-      await apitutors
-        .updateTutorById(tutors[reqIndex]._id, payload)
-        .then((res) => {
-          window.location.reload();
-        });
+      await apitutors.updateTutorById(myreq.id, payload).then((res) => {
+        window.location.reload();
+      });
     }
   };
 
-  cancelTutorReq(reqIndex, myreq) {
-    const { tutorID,tutors } = this.state;
-    if (
-      window.confirm(
-        `Do you want to delete the request by ${myreq.fullname}`
-      )
-    ) {
-      apitutors.deleteTutorById(tutors[reqIndex]._id);
+  cancelTutorReq = async (reqIndex, myreq) => {
+    if (window.confirm(`Do you want to remove the tutor ${myreq.fullname}`)) {
+      await apitutors.deleteTutorById(myreq.id);
       window.location.reload();
     }
-  }
+  };
 
   render() {
-    const {
-      tutors,
-      tutorID,
-      tutorsDup,
-    } = this.state;
+    const { tutors, tutorID, tutorsDup, tutorsN } = this.state;
 
     // console.log(tutorID);
-    // console.log(tutors);
+    //console.log(tutors);
 
-    tutors.map((req) => {
-      if (req.tutorID === tutorID && req.accept === false) {
-        tutors.push(req);
+    const gg = _.uniq(tutors);
+    //console.log(gg);
+
+    gg.map((req) => {
+      if (req.accept == false) {
+        tutorsN.push(req);
+        //console.log(gg);
       }
     });
-    // console.log(tutorID);
+    //console.log(tutorsN);
 
-    // const tutorID = _.uniq(tutorID);
+    const tutorsU = _.uniq(tutorsN);
+    console.log(tutorsU);
 
-    tutors.map((tutor) => {
-        const details = {
-          id: tutor._id,
-          fullname: tutor.fullname,
-          email: tutor.email,
-          address:tutor.address,
-          nic:tutor.nic,
-          dob:tutor.dob,
-          contact_number: tutor.contact_number,
-          gender:tutor.gender,
-          sub_val:tutor.subjects[0].value,
-          sub_label:tutor.subjects[0].label,
-          description:tutor.description,
-          date: tutor.date,
-          accept:tutor.accept,                 
-        };
-        
-        // console.log(details);
-        tutorsDup.push(details);
+    tutorsU.map((tutor) => {
+      const details = {
+        id: tutor._id,
+        fullname: tutor.fullname,
+        email: tutor.email,
+        address: tutor.address,
+        nic: tutor.nic,
+        dob: tutor.dob,
+        contact_number: tutor.contact_number,
+        gender: tutor.gender,
+        sub_val: tutor.subjects[0].value,
+        sub_label: tutor.subjects[0].label,
+        subjects: tutor.subjects,
+        password: tutor.password,
+        description: tutor.description,
+        date: tutor.date,
+        accept: tutor.accept,
+      };
+
+      // console.log(details);
+      tutorsDup.push(details);
     });
 
-  const AllTutors = _.uniq(tutorsDup);
+    const AllTutors = _.dropRight(tutorsDup, tutorsDup.length - tutorsU.length);
+    //console.log(AllTutors);
 
-  let showTable = true
-  if (!this.state.tutors.length) {
-      showTable = false
-  }
+    let showTable = true;
+    if (!AllTutors.length) {
+      showTable = false;
+    }
 
     return (
       <div>
@@ -149,7 +157,7 @@ class TutorRequests extends Component {
 
             <tbody>
               {AllTutors.map((myreq) => {
-                if (myreq._id != "" && myreq.accept === false) {
+                if (myreq._id != "") {
                   const index = AllTutors.indexOf(myreq);
                   const date = myreq.date.split("T")[0];
                   const dob = myreq.dob.split("T")[0];
@@ -162,28 +170,27 @@ class TutorRequests extends Component {
                       <td>{dob}</td>
                       <td>{myreq.contact_number}</td>
                       <td>{myreq.gender}</td>
-                      <td>{myreq.sub_val} {myreq.sub_label}</td>
+                      <td>
+                        {myreq.sub_val} {myreq.sub_label}
+                      </td>
                       <td>{myreq.description}</td>
                       <td>{date}</td>
-                      
                       <td>
-                      <button
-                        class="btn btn-success"
-                        onClick={this.handleAccept.bind(this, index, myreq)}
-                      >
-                        ACCEPT
-                      </button>
+                        <button
+                          class="btn btn-success"
+                          onClick={this.handleAccept.bind(this, index, myreq)}
+                        >
+                          ACCEPT
+                        </button>
                       </td>
-
                       <td>
-                      <button
-                        class="btn btn-warning"
-                        onClick={this.cancelTutorReq.bind(this, index, myreq)}
-                      >
-                        Cancel
-                      </button>
+                        <button
+                          class="btn btn-warning"
+                          onClick={this.cancelTutorReq.bind(this, index, myreq)}
+                        >
+                          Cancel
+                        </button>
                       </td>
-
                     </tr>
                   );
                 }

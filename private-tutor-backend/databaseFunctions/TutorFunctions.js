@@ -60,6 +60,9 @@ updateTutor = async (req, res) => {
     newtutor.subjects = body.subjects;
     newtutor.description = body.description;
     newtutor.password = body.password;
+    //****************************/
+    newtutor.accept = body.accept;
+    /********************************/
 
     newtutor
       .save()

@@ -9,6 +9,7 @@ import SentAppoinments from "./SentAppoinments";
 import AppoinmentForm from "./AppoinmentForm";
 import FixedAppoinments from "./FixedAppoinments";
 import apistudent from "../api/studentapi";
+import TutorNotes from "./TutNotes";
 
 class StudentSection extends Component {
   constructor(props) {
@@ -74,6 +75,14 @@ class StudentSection extends Component {
                   <font color="blue"> SENT APPOINMENTS </font>
                 </Link>
               </div>
+              <div className="gap">
+                <Link
+                  to={`/tutornotes/${this.state.studentID}`}
+                  className="waves-effect waves-light btn-small"
+                >
+                  <font color="blue"> TUTOR NOTES </font>
+                </Link>
+              </div>
             </div>
             <div className="barside">
               <Route
@@ -81,6 +90,7 @@ class StudentSection extends Component {
                 path="/fixed-appoinments/:value"
                 component={FixedAppoinments}
               />
+              <Route exact path="/tutornotes/:value" component={TutorNotes} />
               <Route exact path="/mytutors/:value" component={MyTutors} />
               <Route
                 exact

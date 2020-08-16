@@ -26,6 +26,7 @@ class TutorProfile extends Component {
       tutor: {},
       dob: "",
       password: ``,
+      accept: true,
       show: false,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -71,6 +72,7 @@ class TutorProfile extends Component {
       subjects: tutor.subjects,
       description: tutor.description,
       password: tutor.password,
+      accept: tutor.accept,
     };
 
     api.updateTutorById(tutorID, payload).then((res) => {
@@ -91,6 +93,7 @@ class TutorProfile extends Component {
       subjects: tutor.subjects,
       description: tutor.description,
       password: tutor.password,
+      accept: tutor.accept,
     };
 
     api.updateTutorById(tutorID, payload).then((res) => {
@@ -111,6 +114,7 @@ class TutorProfile extends Component {
       subjects: tutor.subjects,
       description: tutor.description,
       password: tutor.password,
+      accept: tutor.accept,
     };
 
     api.updateTutorById(tutorID, payload).then((res) => {
@@ -131,6 +135,7 @@ class TutorProfile extends Component {
       subjects: tutor.subjects,
       description: tutor.description,
       password: tutor.password,
+      accept: tutor.accept,
     };
 
     api.updateTutorById(tutorID, payload).then((res) => {
@@ -151,6 +156,7 @@ class TutorProfile extends Component {
       subjects: tutor.subjects,
       description: tutor.description,
       password: tutor.password,
+      accept: tutor.accept,
     };
 
     api.updateTutorById(tutorID, payload).then((res) => {
@@ -171,6 +177,7 @@ class TutorProfile extends Component {
       subjects: tutor.subjects,
       description: tutor.description,
       password: tutor.password,
+      accept: tutor.accept,
     };
 
     api.updateTutorById(tutorID, payload).then((res) => {
@@ -192,6 +199,7 @@ class TutorProfile extends Component {
       subjects: tutor.subjects,
       description: tutor.description,
       password: tutor.password,
+      accept: tutor.accept,
     };
 
     api.updateTutorById(tutorID, payload).then((res) => {
@@ -212,6 +220,7 @@ class TutorProfile extends Component {
       subjects: tutor.subjects,
       description: description,
       password: tutor.password,
+      accept: tutor.accept,
     };
 
     api.updateTutorById(tutorID, payload).then((res) => {

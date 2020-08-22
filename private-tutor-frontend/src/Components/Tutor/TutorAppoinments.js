@@ -31,17 +31,17 @@ class TutorAppoinments extends Component {
     });
   };
 
-  cancelAppoinment(reqIndex, myreq) {
+  cancelAppoinment = async (reqIndex, myreq) => {
     const { myAppoinIDDup } = this.state;
     if (
       window.confirm(
         `Do you want to  permanently delete the appoinment by ${myreq.firstname} ${myreq.lastname}?`
       )
     ) {
-      apisappoinment.deleteAppoinmentById(myAppoinIDDup[reqIndex]._id);
+      await apisappoinment.deleteAppoinmentById(myAppoinIDDup[reqIndex]._id);
       window.location.reload();
     }
-  }
+  };
   render() {
     const {
       studentsDup,

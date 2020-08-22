@@ -52,7 +52,7 @@ class TeachingSubjects extends Component {
   };
 
   //add the subjects to the logged tutor
-  handleSubmit(e) {
+  handleSubmit = async (e) => {
     const { tutor, subjects, selectedOption, tutorID } = this.state;
     if (selectedOption != null) {
       subjects.push(selectedOption);
@@ -66,16 +66,18 @@ class TeachingSubjects extends Component {
         gender: tutor.gender,
         subjects: subjects,
         description: tutor.description,
+        accept: tutor.accept,
+        password: tutor.password,
       };
 
-      api.updateTutorById(tutorID, payload).then((res) => {
+      await api.updateTutorById(tutorID, payload).then((res) => {
         window.location.reload();
       });
     }
-  }
+  };
 
   //delete the subjects from the logged user
-  handleDelete(sbj, index) {
+  handleDelete = async (sbj, index) => {
     const { tutor, subjects, tutorID } = this.state;
     if (index > -1) {
       subjects.splice(index, 1);
@@ -90,12 +92,14 @@ class TeachingSubjects extends Component {
       gender: tutor.gender,
       subjects: subjects,
       description: tutor.description,
+      accept: tutor.accept,
+      password: tutor.password,
     };
 
-    api.updateTutorById(tutorID, payload).then((res) => {
+    await api.updateTutorById(tutorID, payload).then((res) => {
       window.location.reload();
     });
-  }
+  };
 
   render() {
     const { subjects, subjectsListDup, modSbjDup, selectedOption } = this.state;

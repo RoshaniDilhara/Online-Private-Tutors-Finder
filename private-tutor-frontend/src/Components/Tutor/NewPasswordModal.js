@@ -35,6 +35,7 @@ class NewPasswordModal extends Component {
         subjects: tutor.subjects,
         description: tutor.description,
         password: hash,
+        accept: tutor.accept,
       };
 
       api.updateTutorById(tutor._id, payload).then((res) => {

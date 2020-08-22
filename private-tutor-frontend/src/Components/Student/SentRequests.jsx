@@ -17,16 +17,16 @@ class SentRequests extends Component {
     };
   }
 
-  deleteRequest(newtutor) {
+  deleteRequest = async (newtutor) => {
     if (
       window.confirm(
         `Do you want to delete request to ${newtutor.fullname} permanently?`
       )
     ) {
-      apirequest.deleteRequestById(newtutor.req);
+      await apirequest.deleteRequestById(newtutor.req);
       window.location.reload();
     }
-  }
+  };
   componentDidMount = async () => {
     this.setState({ isLoading: true });
 

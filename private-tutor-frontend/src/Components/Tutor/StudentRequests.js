@@ -51,17 +51,17 @@ class StudentRequests extends Component {
     }
   };
 
-  ignoreStudentReq(reqIndex, myreq) {
+  ignoreStudentReq = async (reqIndex, myreq) => {
     const { myRequestsID } = this.state;
     if (
       window.confirm(
         `Do you want to delete the request by ${myreq.firstname} ${myreq.lastname}`
       )
     ) {
-      apirequest.deleteRequestById(myRequestsID[reqIndex]._id);
+      await apirequest.deleteRequestById(myRequestsID[reqIndex]._id);
       window.location.reload();
     }
-  }
+  };
 
   render() {
     const {

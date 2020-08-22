@@ -11,12 +11,12 @@ class SentAppoinments extends Component {
     studentID: this.props.match.params.value,
     myappoinmentsDup: [],
   };
-  deleteAppoinment(newappoinment) {
+  deleteAppoinment = async (newappoinment) => {
     if (window.confirm(`Do you want to delete this appoinment permanently?`)) {
-      apiappoinment.deleteAppoinmentById(newappoinment._id);
+      await apiappoinment.deleteAppoinmentById(newappoinment._id);
       window.location.reload();
     }
-  }
+  };
   componentDidMount = async () => {
     await api.getAllTutor().then((tutors) => {
       this.setState({

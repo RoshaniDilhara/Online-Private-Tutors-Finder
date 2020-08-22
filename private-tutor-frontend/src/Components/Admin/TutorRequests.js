@@ -52,6 +52,7 @@ class TutorRequests extends Component {
   };
 
   cancelTutorReq = async (reqIndex, myreq) => {
+    const { accept, tutorID, tutors } = this.state;
     if (window.confirm(`Do you want to remove the tutor ${myreq.fullname}`)) {
       await apitutors.deleteTutorById(myreq.id);
       window.location.reload();
